@@ -24,16 +24,16 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.viewpager.widget.ViewPager;
-
+import com.blankj.utilcode.util.ThreadUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.api.ApiConfig;
+import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.base.BaseActivity;
 import com.github.tvbox.osc.base.BaseLazyFragment;
 import com.github.tvbox.osc.bean.AbsSortXml;
@@ -62,20 +62,17 @@ import com.orhanobut.hawk.Hawk;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager;
 import com.owen.tvrecyclerview.widget.V7LinearLayoutManager;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import me.jessyan.autosize.utils.AutoSizeUtils;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
 
 public class HomeActivity extends BaseActivity {
 
@@ -105,15 +102,16 @@ public class HomeActivity extends BaseActivity {
     public View sortFocusView = null;
     private final Handler mHandler = new Handler();
     private long mExitTime = 0;
+    @SuppressLint("SimpleDateFormat")
+    private SimpleDateFormat timeFormat = new SimpleDateFormat(
+            App.getInstance().getString(R.string.hm_date1) + ", " + App.getInstance().getString(R.string.hm_date2));
     private final Runnable mRunnable = new Runnable() {
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
         @Override
         public void run() {
             Date date = new Date();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat timeFormat = new SimpleDateFormat(getString(R.string.hm_date1) + ", " + getString(R.string.hm_date2));
             tvDate.setText(timeFormat.format(date));
-            mHandler.postDelayed(this, 1000);
+            mHandler.postDelayed(this, 1000L);
         }
     };
 
@@ -236,14 +234,17 @@ public class HomeActivity extends BaseActivity {
         tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                dataInitOk = false;
-//                jarInitOk = true;
-//                showSiteSwitch();
-                File dir = getCacheDir();
-                FileUtils.recursiveDelete(dir);
-                dir = getExternalCacheDir();
-                FileUtils.recursiveDelete(dir);
-                Toast.makeText(HomeActivity.this, getString(R.string.hm_cache_del), Toast.LENGTH_SHORT).show();
+                ThreadUtils.getIoPool().execute(() -> {
+                    //dataInitOk = false;
+                    //jarInitOk = true;
+                    //showSiteSwitch();
+                    File dir = getCacheDir();
+                    FileUtils.recursiveDelete(dir);
+                    dir = getExternalCacheDir();
+                    FileUtils.recursiveDelete(dir);
+                    runOnUiThread(() -> ToastUtils.showShort(getString(R.string.hm_cache_del)));
+                });
+
             }
         });
         tvName.setOnLongClickListener(new View.OnLongClickListener() {
@@ -276,12 +277,12 @@ public class HomeActivity extends BaseActivity {
                     if (Hawk.get(HawkConfig.HOME_REC_STYLE, false)) {
                         UserFragment.tvHotListForGrid.setVisibility(View.VISIBLE);
                         UserFragment.tvHotListForLine.setVisibility(View.GONE);
-                        Toast.makeText(HomeActivity.this, getString(R.string.hm_style_grid), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.hm_style_grid));
                         tvStyle.setImageResource(R.drawable.hm_up_down);
                     } else {
                         UserFragment.tvHotListForGrid.setVisibility(View.GONE);
                         UserFragment.tvHotListForLine.setVisibility(View.VISIBLE);
-                        Toast.makeText(HomeActivity.this, getString(R.string.hm_style_line), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShort(getString(R.string.hm_style_line));
                         tvStyle.setImageResource(R.drawable.hm_left_right);
                     }
                 } catch (Exception ex) {
@@ -405,7 +406,7 @@ public class HomeActivity extends BaseActivity {
                                     if (Hawk.get(HawkConfig.HOME_DEFAULT_SHOW, false)) {
                                         jumpActivity(LivePlayActivity.class);
                                    }
-                                    Toast.makeText(HomeActivity.this, getString(R.string.hm_ok), Toast.LENGTH_SHORT).show();
+                                    ToastUtils.showShort(getString(R.string.hm_ok));
                                 }
                                 initData();
                             }
@@ -423,10 +424,11 @@ public class HomeActivity extends BaseActivity {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                if ("".equals(msg))
-                                    Toast.makeText(HomeActivity.this, getString(R.string.hm_notok), Toast.LENGTH_SHORT).show();
-                                else
-                                    Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                if ("".equals(msg)) {
+                                    ToastUtils.showShort(getString(R.string.hm_notok));
+                                } else {
+                                    ToastUtils.showShort(msg);
+                                }
                                 initData();
                             }
                         });
@@ -553,6 +555,7 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBackPressed() {
 
@@ -599,7 +602,7 @@ public class HomeActivity extends BaseActivity {
             super.onBackPressed();
         } else {
             mExitTime = System.currentTimeMillis();
-            Toast.makeText(mContext, getString(R.string.hm_exit), Toast.LENGTH_SHORT).show();
+            ToastUtils.showShort(getString(R.string.hm_exit));
         }
     }
 
@@ -765,6 +768,7 @@ public class HomeActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
         AppManager.getInstance().appExit(0);
         ControlManager.get().stopServer();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     // Site Switch on Home Button
