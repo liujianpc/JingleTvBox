@@ -157,7 +157,14 @@ public class DetailActivity extends BaseActivity {
     private void initBrightness() {
         Window window = this.getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.screenBrightness = 0.8f;
+        attributes.screenBrightness = Hawk.get(HawkConfig.PLAYER_BRIGHTNESS, 5) * 0.1f;
+        window.setAttributes(attributes);
+    }
+
+    public void setBrightness(float brightness) {
+        Window window = this.getWindow();
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.screenBrightness = brightness;
         window.setAttributes(attributes);
     }
 

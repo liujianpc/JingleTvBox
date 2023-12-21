@@ -6,6 +6,14 @@ def static buildTime() {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/bytedance/Downloads/androidKeyStore')
+            storePassword 'abc7612776'
+            keyAlias 'key0'
+            keyPassword 'abc7612776'
+        }
+    }
     compileSdk 33
 
     defaultConfig {
@@ -32,6 +40,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             minifyEnabled true
             shrinkResources true
+            zipAlignEnabled true
 
             ndk {
                 abiFilters 'armeabi-v7a'                

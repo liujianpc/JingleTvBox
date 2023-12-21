@@ -23,11 +23,9 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.transition.TransitionManager;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.api.ApiConfig;
@@ -51,18 +49,16 @@ import com.github.tvbox.osc.util.SubtitleHelper;
 import com.orhanobut.hawk.Hawk;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.tvrecyclerview.widget.V7LinearLayoutManager;
-import org.greenrobot.eventbus.EventBus;
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
+import org.greenrobot.eventbus.EventBus;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 import xyz.doikki.videoplayer.player.VideoView;
 import xyz.doikki.videoplayer.util.PlayerUtils;
 
@@ -287,6 +283,7 @@ public class VodController extends BaseController {
     TextView mPlayerTimeStartBtn;
     TextView mPlayerTimeSkipBtn;
     TextView mPlayerTimeStepBtn;
+    TextView mPlayerBrightnessBtn;
 
     // parse container
     LinearLayout mParseRoot;
@@ -380,6 +377,7 @@ public class VodController extends BaseController {
         mPlayerTimeStartBtn = findViewById(R.id.play_time_start);
         mPlayerTimeSkipBtn = findViewById(R.id.play_time_end);
         mPlayerTimeStepBtn = findViewById(R.id.play_time_step);
+        mPlayerBrightnessBtn = findViewById(R.id.play_brightness);
 
         // parse container
         mParseRoot = findViewById(R.id.parse_root);
@@ -830,6 +828,21 @@ public class VodController extends BaseController {
                 return true;
             }
         });
+
+        mPlayerBrightnessBtn.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                try {
+                    mPlayerConfig.put("br", 0);
+                    Hawk.put(HawkConfig.PLAYER_BRIGHTNESS, 0);
+                    updatePlayerCfgView();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+
         // Button: BACK click to go back to previous page -------------------
         mBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -844,6 +857,37 @@ public class VodController extends BaseController {
                     ((DetailActivity) mActivity).toggleFullPreview();
                 } else {
                     mActivity.finish();
+                }
+            }
+        });
+
+        mPlayerBrightnessBtn.setOnClickListener(new OnClickListener() {
+            int direction = 1;
+
+            @Override
+            public void onClick(View view) {
+                mHandler.removeCallbacks(mHideBottomRunnable);
+                mHandler.postDelayed(mHideBottomRunnable, 8000);
+                try {
+                    int currentBrightness = mPlayerConfig.optInt("br", 5);
+                    if (currentBrightness >= 10) {
+                        direction = -1;
+                    } else if (currentBrightness <= 0) {
+                        direction = 1;
+                    }
+
+                    currentBrightness += direction;
+
+                    Hawk.put(HawkConfig.PLAYER_BRIGHTNESS, currentBrightness);
+
+                    mPlayerConfig.put("br", currentBrightness);
+                    if (mActivity != null) {
+                        ((DetailActivity) mActivity).setBrightness(currentBrightness * 0.1f);
+                    }
+                    updatePlayerCfgView();
+                    listener.updatePlayerCfg();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -888,6 +932,7 @@ public class VodController extends BaseController {
             mPlayerTimeStartBtn.setText(PlayerUtils.stringForTime(mPlayerConfig.getInt("st") * 1000));
             mPlayerTimeSkipBtn.setText(PlayerUtils.stringForTime(mPlayerConfig.getInt("et") * 1000));
             mPlayerTimeStepBtn.setText(Hawk.get(HawkConfig.PLAY_TIME_STEP, 5) + "s");
+            mPlayerBrightnessBtn.setText(String.format("%.1f", mPlayerConfig.getInt("br") * 0.1f));
 //            mSubtitleBtn.setVisibility(playerType == 1 ? VISIBLE : GONE);
 //            mAudioTrackBtn.setVisibility(playerType == 1 ? VISIBLE : GONE);
         } catch (JSONException e) {

@@ -1079,6 +1079,9 @@ public class PlayFragment extends BaseLazyFragment {
             if (!mVodPlayerCfg.has("et")) {
                 mVodPlayerCfg.put("et", 0);
             }
+            if (!mVodPlayerCfg.has("br")) {
+                mVodPlayerCfg.put("br", 5);
+            }
         } catch (Throwable th) {
 
         }
