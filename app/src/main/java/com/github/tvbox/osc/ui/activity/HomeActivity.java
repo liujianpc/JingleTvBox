@@ -1,6 +1,7 @@
 package com.github.tvbox.osc.ui.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.IntEvaluator;
@@ -321,6 +322,24 @@ public class HomeActivity extends BaseActivity {
         setLoadSir(this.contentLayout);
         //mHandler.postDelayed(mFindFocus, 250);
     }
+    
+    public static boolean reHome(Context appContext) {
+        Intent intent = new Intent(appContext, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("useCache", true);
+        intent.putExtras(bundle);
+        appContext.startActivity(intent);
+        return true;
+    }
+    
+    public static void homeRecf() { //站点切换
+        int homeRec = Hawk.get(HawkConfig.HOME_REC, -1);
+        int limit = 2;
+        if (homeRec == limit) homeRec = -1;
+        homeRec++;
+        Hawk.put(HawkConfig.HOME_REC, homeRec);
+    }
 
     private void initViewModel() {
         sourceViewModel = new ViewModelProvider(this).get(SourceViewModel.class);
@@ -390,6 +409,9 @@ public class HomeActivity extends BaseActivity {
             } else {
                 LOG.e("无");
             }
+            if (Hawk.get(HawkConfig.HOME_DEFAULT_SHOW, false)) {
+                jumpActivity(LivePlayActivity.class);
+            }         
             return;
         }
         showLoading();
@@ -403,9 +425,6 @@ public class HomeActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 if (!useCacheConfig) {
-                                    if (Hawk.get(HawkConfig.HOME_DEFAULT_SHOW, false)) {
-                                        jumpActivity(LivePlayActivity.class);
-                                   }
                                     ToastUtils.showShort(getString(R.string.hm_ok));
                                 }
                                 initData();
