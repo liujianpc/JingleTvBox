@@ -16,13 +16,14 @@ android {
         }
     }
     compileSdk 33
+    flavorDimensions "beijing"
 
     defaultConfig {
-        applicationId 'com.github.tvbox.osc.tk'
+        applicationId 'com.github.tvbox.osc.jingle'
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.".concat(buildTime())
+        versionName "1.0-jingle-".concat(buildTime())
         multiDexEnabled true
         //设置room的Schema的位置
         javaCompileOptions {
@@ -39,13 +40,54 @@ android {
     buildTypes {        
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            versionNameSuffix ".release"
+            applicationIdSuffix ".release"
+
+
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
+            signingConfig signingConfigs.release
 
             ndk {
-                abiFilters 'armeabi-v7a'                
+                abiFilters 'armeabi-v7a'
             }
+        }
+    }
+
+    productFlavors {
+        jingle {
+            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("String", "SERVER_NAME", "\"BJ\"")
+            buildConfigField("String", "SERVER_HOST", "\"http://218.206.176.238:8080\"")
+            buildConfigField("String", "LOGIN_API", "\"login\"")
+        }
+        /*local{
+            buildConfigField("boolean", "IS_LOCAL", "true")
+            buildConfigField("String", "SERVER_NAME", "\"LOCAL\"")
+            buildConfigField("String", "SERVER_HOST", "\"https://192.168.1.133:8443\"")
+            buildConfigField("String", "LOGIN_API", "\"login\"")
+        }
+        tao{
+            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("String", "SERVER_NAME", "\"SD\"")
+            buildConfigField("String", "SERVER_HOST", "\"http://223.99.141.138:8080\"")
+            buildConfigField("String", "LOGIN_API", "\"loginsd\"")
+        }
+        liu{
+            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("String", "SERVER_NAME", "\"A\"")
+            buildConfigField("String", "SERVER_HOST", "\"http://139.129.233.168:9007\"")
+            buildConfigField("String", "LOGIN_API", "\"login\"")
+        }*/
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "tvbox_${variant.productFlavors[0].name}_v${variant.versionName}.apk"
         }
     }
 
