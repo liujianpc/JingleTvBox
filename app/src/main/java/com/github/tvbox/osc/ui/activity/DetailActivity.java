@@ -85,6 +85,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
+import com.github.tvbox.osc.BuildConfig;
 
 /**
  * @author pj567
@@ -250,6 +251,7 @@ public class DetailActivity extends BaseActivity {
         llPlayerPlace.setVisibility(showPreview ? View.VISIBLE : View.GONE);
         ivThumb.setVisibility(!showPreview ? View.VISIBLE : View.GONE);
         tvName = findViewById(R.id.tvName);
+        tvName.setText(BuildConfig.APP_NAME);
         tvYear = findViewById(R.id.tvYear);
         tvSite = findViewById(R.id.tvSite);
         tvArea = findViewById(R.id.tvArea);

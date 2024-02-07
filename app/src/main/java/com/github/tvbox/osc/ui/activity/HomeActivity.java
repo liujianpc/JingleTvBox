@@ -75,6 +75,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
+import com.github.tvbox.osc.BuildConfig;
 
 public class HomeActivity extends BaseActivity {
 
@@ -637,7 +638,7 @@ public class HomeActivity extends BaseActivity {
                 tvName.setText(home.getName());
             }
         } else {
-            tvName.setText(R.string.app_name);
+            tvName.setText(BuildConfig.APP_NAME);
         }
 
         // takagen99: Icon Placement

@@ -60,10 +60,29 @@ android {
 
     productFlavors {
         jingle {
+            applicationId "com.tvbox.jingle"
             buildConfigField("boolean", "IS_LOCAL", "false")
-            buildConfigField("String", "SERVER_NAME", "\"BJ\"")
+            buildConfigField("String", "APP_NAME", "\"坚果TV\"")
             buildConfigField("String", "SERVER_HOST", "\"http://218.206.176.238:8080\"")
             buildConfigField("String", "LOGIN_API", "\"login\"")
+            manifestPlaceholders = [
+                    app_icon: "@drawable/app_icon",
+                    app_name: "坚果TV",
+            ]
+
+        }
+
+        tao {
+            applicationId "com.tvbox.taozi"
+            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("String", "APP_NAME", "\"桃子TV\"")
+            buildConfigField("String", "SERVER_HOST", "\"http://218.206.176.238:8080\"")
+            buildConfigField("String", "LOGIN_API", "\"login\"")
+            manifestPlaceholders = [
+                    app_icon: "@drawable/app_icon",
+                    app_name: "桃子TV",
+            ]
+
         }
         /*local{
             buildConfigField("boolean", "IS_LOCAL", "true")
