@@ -5,19 +5,17 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.util.Base64;
-
+import androidx.annotation.DrawableRes;
 import com.github.tvbox.osc.R;
-import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.api.ApiConfig;
+import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.event.ServerEvent;
 import com.github.tvbox.osc.util.FileUtils;
 import com.github.tvbox.osc.util.OkGoHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
-import org.greenrobot.eventbus.EventBus;
-
+import fi.iki.elonen.NanoHTTPD;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -42,8 +40,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import fi.iki.elonen.NanoHTTPD;
+import org.greenrobot.eventbus.EventBus;
+import com.github.tvbox.osc.BuildConfig;
 
 /**
  * @author pj567
@@ -72,9 +70,25 @@ public class RemoteServer extends NanoHTTPD {
         getRequestList.add(new RawRequestProcess(this.mContext, "/index.html", R.raw.index, NanoHTTPD.MIME_HTML));
         getRequestList.add(new RawRequestProcess(this.mContext, "/style.css", R.raw.style, "text/css"));
         getRequestList.add(new RawRequestProcess(this.mContext, "/ui.css", R.raw.ui, "text/css"));
-        getRequestList.add(new RawRequestProcess(this.mContext, "/jquery.js", R.raw.jquery, "application/x-javascript"));
-        getRequestList.add(new RawRequestProcess(this.mContext, "/script.js", R.raw.script, "application/x-javascript"));
-        getRequestList.add(new RawRequestProcess(this.mContext, "/favicon.ico", R.drawable.app_icon, "image/x-icon"));
+        getRequestList.add(
+                new RawRequestProcess(this.mContext, "/jquery.js", R.raw.jquery, "application/x-javascript"));
+        getRequestList.add(
+                new RawRequestProcess(this.mContext, "/script.js", R.raw.script, "application/x-javascript"));
+        getRequestList.add(new RawRequestProcess(this.mContext, "/favicon.ico", getSmallIcon(), "image/x-icon"));
+    }
+
+    @DrawableRes
+    private int getSmallIcon() {
+        switch (BuildConfig.channel) {
+            case 0:
+                return R.drawable.app_icon_jingle;
+            case 1:
+                return R.drawable.app_icon_tao;
+
+            default:
+                return R.drawable.app_icon_jingle;
+        }
+
     }
 
     private void addPostRequestProcess() {

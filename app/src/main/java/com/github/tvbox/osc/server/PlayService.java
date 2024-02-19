@@ -6,16 +6,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
-import com.blankj.utilcode.util.LogUtils;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.event.RefreshEvent;
@@ -24,7 +23,7 @@ import com.github.tvbox.osc.ui.activity.DetailActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
+import com.github.tvbox.osc.BuildConfig;
 
 public class PlayService extends Service {
 	static String videoInfo = "TVBox&&第一集";
@@ -82,9 +81,9 @@ public class PlayService extends Service {
         remoteViews.setOnClickPendingIntent(R.id.iv_previous, getPendingIntent(DetailActivity.BROADCAST_ACTION_PREV));
         remoteViews.setOnClickPendingIntent(R.id.iv_play_pause, getPendingIntent(DetailActivity.BROADCAST_ACTION_PLAYPAUSE));
         remoteViews.setOnClickPendingIntent(R.id.iv_next, getPendingIntent(DetailActivity.BROADCAST_ACTION_NEXT));
-        
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.app_icon)
+                .setSmallIcon(getSmallIcon())
                 .setContent(remoteViews)
                 .setCustomContentView(remoteViews)
                 .setContentIntent(getPendingIntentActivity())
@@ -93,15 +92,30 @@ public class PlayService extends Service {
         return builder.build();
     }
 
+    @DrawableRes
+    private int getSmallIcon() {
+        switch (BuildConfig.channel) {
+            case 0:
+                return R.drawable.app_icon_jingle;
+            case 1:
+                return R.drawable.app_icon_tao;
+
+            default:
+                return R.drawable.app_icon_jingle;
+        }
+
+    }
+
     private NotificationCompat.Action buildNotificationAction(int iconResId, String title, PendingIntent intent) {
-    	final IconCompat icon = IconCompat.createWithResource(App.getInstance(), iconResId);
+        final IconCompat icon = IconCompat.createWithResource(App.getInstance(), iconResId);
         // 创建通知栏操作
         return new NotificationCompat.Action.Builder(icon, title, intent).build();
     }
 
     private PendingIntent getPendingIntentActivity() {
         Intent intent = new Intent(this, DetailActivity.class);
-        return PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        return PendingIntent.getActivity(this, 1, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
     public static PendingIntent getPendingIntent(int actionCode) {
         return PendingIntent.getBroadcast(App.getInstance(), actionCode, new Intent(DetailActivity.BROADCAST_ACTION).putExtra("action", actionCode).setPackage(App.getInstance().getPackageName()),PendingIntent.FLAG_UPDATE_CURRENT);

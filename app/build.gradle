@@ -6,13 +6,16 @@ def static buildTime() {
     return new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
 }
 
+Properties props = new Properties()
+props.load(new FileInputStream(file(rootDir.absolutePath + "/local.properties")))
+
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/bytedance/Downloads/androidKeyStore')
-            storePassword 'abc7612776'
-            keyAlias 'key0'
-            keyPassword 'abc7612776'
+            storeFile file(props['KEYSTORE_FILE'])
+            keyAlias props['KEY_ALIAS']
+            storePassword props['KEYSTORE_PASSWORD']
+            keyPassword props['KEY_PASSWORD']
         }
     }
     compileSdk 33
@@ -53,7 +56,7 @@ android {
             signingConfig signingConfigs.release
 
             ndk {
-                abiFilters 'armeabi-v7a'
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -61,12 +64,10 @@ android {
     productFlavors {
         jingle {
             applicationId "com.tvbox.jingle"
-            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("int", "channel", "0")
             buildConfigField("String", "APP_NAME", "\"坚果TV\"")
-            buildConfigField("String", "SERVER_HOST", "\"http://218.206.176.238:8080\"")
-            buildConfigField("String", "LOGIN_API", "\"login\"")
             manifestPlaceholders = [
-                    app_icon: "@drawable/ic_launcher",
+                    app_icon: "@drawable/app_icon_jingle",
                     app_name: "坚果TV",
             ]
 
@@ -74,12 +75,10 @@ android {
 
         tao {
             applicationId "com.tvbox.taozi"
-            buildConfigField("boolean", "IS_LOCAL", "false")
+            buildConfigField("int", "channel", "1")
             buildConfigField("String", "APP_NAME", "\"桃子TV\"")
-            buildConfigField("String", "SERVER_HOST", "\"http://218.206.176.238:8080\"")
-            buildConfigField("String", "LOGIN_API", "\"login\"")
             manifestPlaceholders = [
-                    app_icon: "@drawable/app_icon",
+                    app_icon: "@drawable/app_icon_tao",
                     app_name: "桃子TV",
             ]
 
