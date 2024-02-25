@@ -36,7 +36,7 @@ import me.jessyan.autosize.unit.Subunits;
  */
 public class App extends MultiDexApplication {
 
-    private static final String DEFAULT_API_URL = "https://hub.gitmirror.com/https://raw.githubusercontent.com/liujianpc/JingleTvBox/main/api/xiangya.json";
+    private static final String DEFAULT_API_URL = "https://gh.con.sh/https://raw.githubusercontent.com/liujianpc/JingleTvBox/main/api/api.json";
     private static App instance;
     private static P2PClass p;
     public static String burl;

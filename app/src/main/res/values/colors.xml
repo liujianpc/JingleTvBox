@@ -26,7 +26,7 @@
     <!-- Main Dialog BG -->
     <color name="color_6A6A6A_95">#F26A6A6A</color>
 
-    <color name="color_FFFFFF">#FFFFFF</color>
+    <color name="color_FFFFFF">#FFFFFFFF</color>
     <color name="color_FFFFFF_90">#E6FFFFFF</color>
     <color name="color_FFFFFF_80">#CCFFFFFF</color>
     <color name="color_FFFFFF_70">#B3FFFFFF</color>
