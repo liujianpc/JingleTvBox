@@ -137,7 +137,6 @@ public class App extends MultiDexApplication {
         putDefault(HawkConfig.IJK_CACHE_PLAY, true);         //false 不使用 ijk缓存，true 使用 ijk 缓存
         if (TextUtils.isEmpty(Hawk.get(HawkConfig.API_URL, ""))) {
             putDefault(HawkConfig.API_URL, DEFAULT_API_URL);
-
         }
 
 
