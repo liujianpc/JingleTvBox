@@ -1,9 +1,8 @@
 package com.github.tvbox.osc.base;
 
 import android.os.Environment;
-
 import androidx.multidex.MultiDexApplication;
-
+import com.blankj.utilcode.util.ThreadUtils;
 import com.github.catvod.crawler.JsLoader;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.callback.EmptyCallback;
@@ -13,8 +12,8 @@ import com.github.tvbox.osc.server.ControlManager;
 import com.github.tvbox.osc.util.EpgUtil;
 import com.github.tvbox.osc.util.FileUtils;
 import com.github.tvbox.osc.util.HawkConfig;
-import com.github.tvbox.osc.util.LocaleHelper;
 import com.github.tvbox.osc.util.LOG;
+import com.github.tvbox.osc.util.LocaleHelper;
 import com.github.tvbox.osc.util.OkGoHelper;
 import com.github.tvbox.osc.util.PlayerHelper;
 import com.hjq.permissions.XXPermissions;
@@ -22,12 +21,10 @@ import com.kingja.loadsir.core.LoadSir;
 import com.orhanobut.hawk.Hawk;
 import com.p2p.P2PClass;
 import com.whl.quickjs.android.QuickJSLoader;
-
-import java.io.File;
-
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
+import java.io.File;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.unit.Subunits;
 
@@ -55,7 +52,14 @@ public class App extends MultiDexApplication {
         // 闭关检查模式
         XXPermissions.setCheckMode(false);
         // Get EPG Info
-        EpgUtil.init();
+        ThreadUtils.getIoPool().execute(
+                () -> {
+                    EpgUtil.init();
+                    FileUtils.cleanPlayerCache();
+                }
+
+        );
+
         // 初始化Web服务器
         ControlManager.init(this);
         //初始化数据库
@@ -69,14 +73,6 @@ public class App extends MultiDexApplication {
                 .setSupportSP(false)
                 .setSupportSubunits(Subunits.MM);
         PlayerHelper.init();
-
-        // Delete Cache
-        /*File dir = getCacheDir();
-        FileUtils.recursiveDelete(dir);
-        dir = getExternalCacheDir();
-        FileUtils.recursiveDelete(dir);*/
-
-        FileUtils.cleanPlayerCache();
 
         // Add JS support
         QuickJSLoader.init();
@@ -130,8 +126,12 @@ public class App extends MultiDexApplication {
         putDefault(HawkConfig.THEME_SELECT, 0);              //主题: 0=奈飞, 1=哆啦, 2=百事, 3=鸣人, 4=小黄, 5=八神, 6=樱花
         putDefault(HawkConfig.SEARCH_VIEW, 1);               //搜索展示: 0=文字列表, 1=缩略图
         putDefault(HawkConfig.PARSE_WEBVIEW, true);          //嗅探Webview: true=系统自带, false=XWalkView
-        putDefault(HawkConfig.DOH_URL, 0);                   //安全DNS: 0=关闭, 1=腾讯, 2=阿里, 3=360, 4=Google, 5=AdGuard, 6=Quad9
+        putDefault(HawkConfig.DOH_URL,
+                2);                   //安全DNS: 0=关闭, 1=腾讯, 2=阿里, 3=360, 4=Google, 5=AdGuard, 6=Quad9
 
+        //添加默认开启的优化配置项
+        putDefault(HawkConfig.PLAY_RENDER, 1);               //0 textureView 1 surfaceView
+        putDefault(HawkConfig.IJK_CACHE_PLAY, true);         //false 不使用 ijk缓存，true 使用 ijk 缓存
     }
 
     private void initLocale() {

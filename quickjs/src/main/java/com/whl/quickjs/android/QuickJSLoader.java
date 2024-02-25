@@ -2,13 +2,13 @@ package com.whl.quickjs.android;
 
 public final class QuickJSLoader {
     public static void init() {
-        init(Boolean.FALSE);
+        init(false);
     }
 
-    public static void init(Boolean bool) {
+    public static void init(boolean bool) {
         try {
             System.loadLibrary("quickjs-android-wrapper");
-            if (bool.booleanValue()) {
+            if (bool) {
                 startRedirectingStdoutStderr("QuJs ==> ");
             }
         } catch (Throwable throwable) {
