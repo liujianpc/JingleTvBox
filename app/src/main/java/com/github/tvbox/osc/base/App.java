@@ -1,6 +1,7 @@
 package com.github.tvbox.osc.base;
 
 import android.os.Environment;
+import android.text.TextUtils;
 import androidx.multidex.MultiDexApplication;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.github.catvod.crawler.JsLoader;
@@ -34,6 +35,8 @@ import me.jessyan.autosize.unit.Subunits;
  * @description:
  */
 public class App extends MultiDexApplication {
+
+    private static final String DEFAULT_API_URL = "https://hub.gitmirror.com/https://raw.githubusercontent.com/liujianpc/JingleTvBox/main/api/xiangya.json";
     private static App instance;
     private static P2PClass p;
     public static String burl;
@@ -132,6 +135,12 @@ public class App extends MultiDexApplication {
         //添加默认开启的优化配置项
         putDefault(HawkConfig.PLAY_RENDER, 1);               //0 textureView 1 surfaceView
         putDefault(HawkConfig.IJK_CACHE_PLAY, true);         //false 不使用 ijk缓存，true 使用 ijk 缓存
+        if (TextUtils.isEmpty(Hawk.get(HawkConfig.API_URL, ""))) {
+            putDefault(HawkConfig.API_URL, DEFAULT_API_URL);
+
+        }
+
+
     }
 
     private void initLocale() {
