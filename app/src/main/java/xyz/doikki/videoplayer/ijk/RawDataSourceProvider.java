@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.net.Uri;
 
+import com.github.tvbox.osc.util.LOG;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class RawDataSourceProvider implements IMediaDataSource {
             return new RawDataSourceProvider(fileDescriptor);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return null;
     }

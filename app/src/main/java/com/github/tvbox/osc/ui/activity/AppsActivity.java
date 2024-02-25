@@ -143,7 +143,7 @@ public class AppsActivity extends BaseActivity {
                     try {
                         startActivity(getPackageManager().getLaunchIntentForPackage(appInfo.getPack()));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        com.github.tvbox.osc.util.LOG.e(e);
                     }
                 }
             }

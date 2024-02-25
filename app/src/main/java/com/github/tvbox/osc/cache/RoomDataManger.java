@@ -73,7 +73,7 @@ public class RoomDataManger {
                 return vodInfo;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }
@@ -112,7 +112,7 @@ public class RoomDataManger {
                             info = null;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 if (info != null)
                     vodInfoList.add(info);

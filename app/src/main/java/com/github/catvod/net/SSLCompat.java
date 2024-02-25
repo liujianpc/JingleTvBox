@@ -2,6 +2,7 @@ package com.github.catvod.net;
 
 import android.annotation.SuppressLint;
 
+import com.github.tvbox.osc.util.LOG;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -38,7 +39,7 @@ public class SSLCompat extends SSLSocketFactory {
             preferredCiphers.addAll(new HashSet<>(Arrays.asList(socket.getEnabledCipherSuites())));
             SSLCompat.cipherSuites = preferredCiphers.toArray(new String[preferredCiphers.size()]);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
 
@@ -48,7 +49,7 @@ public class SSLCompat extends SSLSocketFactory {
             context.init(null, new X509TrustManager[]{TM}, null);
             HttpsURLConnection.setDefaultSSLSocketFactory(factory = context.getSocketFactory());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
 

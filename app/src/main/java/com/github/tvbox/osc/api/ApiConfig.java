@@ -21,6 +21,7 @@ import com.github.tvbox.osc.util.AES;
 import com.github.tvbox.osc.util.AdBlocker;
 import com.github.tvbox.osc.util.DefaultConfig;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.MD5;
 import com.github.tvbox.osc.util.VideoParseRuler;
 import com.google.gson.Gson;
@@ -113,7 +114,7 @@ public class ApiConfig {
                 json = content;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return json;
     }
@@ -142,7 +143,7 @@ public class ApiConfig {
                 callback.success();
                 return;
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
             }
         }
         String TempKey = null, configUrl = "", pk = ";pk;";
@@ -163,7 +164,7 @@ public class ApiConfig {
         } else {
             configUrl = apiUrl;
         }
-        System.out.println("API URL :" + configUrl);
+        LOG.i("API URL :" + configUrl);
         String configKey = TempKey;
         OkGo.<String>get(configUrl)
                 .headers("User-Agent", userAgent)
@@ -185,11 +186,11 @@ public class ApiConfig {
                                 fos.flush();
                                 fos.close();
                             } catch (Throwable th) {
-                                th.printStackTrace();
+                                LOG.e(th);
                             }
                             callback.success();
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                             callback.error("解析配置失败");
                         }
                     }
@@ -203,7 +204,7 @@ public class ApiConfig {
                                 callback.success();
                                 return;
                             } catch (Throwable th) {
-                                th.printStackTrace();
+                                LOG.e(th);
                             }
                         }
                         callback.error("拉取配置失败\n" + (response.getException() != null ? response.getException().getMessage() : ""));
@@ -291,7 +292,7 @@ public class ApiConfig {
     }
 
     private void parseJson(String apiUrl, File f) throws Throwable {
-        System.out.println("从本地缓存加载" + f.getAbsolutePath());
+        LOG.i("从本地缓存加载" + f.getAbsolutePath());
         BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(f), "UTF-8"));
         StringBuilder sb = new StringBuilder();
         String s = "";
@@ -404,7 +405,7 @@ public class ApiConfig {
                         }
 
                         // takagen99: Capture Live URL into Config
-                        System.out.println("Live URL :" + extUrlFix);
+                        LOG.i("Live URL :" + extUrlFix);
                         putLiveHistory(extUrlFix);
                         // Overwrite with Live URL from Settings
                         if (StringUtils.isBlank(liveURL)) {
@@ -424,7 +425,7 @@ public class ApiConfig {
                     // takagen99 : Getting EPG URL from File Config & put into Settings
                     if (livesOBJ.has("epg")) {
                         String epg = livesOBJ.get("epg").getAsString();
-                        System.out.println("EPG URL :" + epg);
+                        LOG.i("EPG URL :" + epg);
                         putEPGHistory(epg);
                         // Overwrite with EPG URL from Settings
                         if (StringUtils.isBlank(epgURL)) {
@@ -453,7 +454,7 @@ public class ApiConfig {
                             // takagen99 : Getting EPG URL from File Config & put into Settings
                             if (fengMiLives.has("epg")) {
                                 String epg = fengMiLives.get("epg").getAsString();
-                                System.out.println("EPG URL :" + epg);
+                                LOG.i("EPG URL :" + epg);
                                 putEPGHistory(epg);
                                 // Overwrite with EPG URL from Settings
                                 if (StringUtils.isBlank(epgURL)) {
@@ -465,7 +466,7 @@ public class ApiConfig {
 
                             if (url.startsWith("http")) {
                                 // takagen99: Capture Live URL into Settings
-                                System.out.println("Live URL :" + url);
+                                LOG.i("Live URL :" + url);
                                 putLiveHistory(url);
                                 // Overwrite with Live URL from Settings
                                 if (StringUtils.isBlank(liveURL)) {
@@ -496,7 +497,7 @@ public class ApiConfig {
 
 
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
 
         // Video parse rule for host

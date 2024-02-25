@@ -194,7 +194,7 @@ public class PlayFragment extends BaseLazyFragment {
                 try {
                     st = mVodPlayerCfg.getInt("st");
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 long skip = st * 1000L;
                 if (CacheManager.getCache(MD5.string2MD5(url)) == null) {
@@ -275,7 +275,7 @@ public class PlayFragment extends BaseLazyFragment {
                 try {
                     selectMySubtitle();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
 
@@ -854,7 +854,7 @@ public class PlayFragment extends BaseLazyFragment {
                                 return;
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            com.github.tvbox.osc.util.LOG.e(e);
                         }
                         hideTip();
                         if (url.startsWith("data:application/dash+xml;base64,")) {
@@ -1369,7 +1369,7 @@ public class PlayFragment extends BaseLazyFragment {
                 parseThreadPool.shutdown();
                 parseThreadPool = null;
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
             }
         }
     }
@@ -1402,7 +1402,7 @@ public class PlayFragment extends BaseLazyFragment {
                         if (reqHeaders.size() > 0) webHeaderMap = reqHeaders;
                     }
                 } catch (Throwable e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
             loadWebView(pb.getUrl() + webUrl);
@@ -1422,7 +1422,7 @@ public class PlayFragment extends BaseLazyFragment {
                     }
                 }
             } catch (Throwable e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
             OkGo.<String>get(pb.getUrl() + encodeUrl(webUrl))
                     .tag("json_jx")
@@ -1460,7 +1460,7 @@ public class PlayFragment extends BaseLazyFragment {
                                 }
                                 playUrl(rs.getString("url"), headers);
                             } catch (Throwable e) {
-                                e.printStackTrace();
+                                com.github.tvbox.osc.util.LOG.e(e);
                                 errorWithRetry("解析错误", false);
 //                                setTip("解析错误", false, true);
                             }
@@ -1579,7 +1579,7 @@ public class PlayFragment extends BaseLazyFragment {
                                         headers.put(key, hds.getString(key));
                                     }
                                 } catch (Throwable th) {
-                                    th.printStackTrace();
+                                    LOG.e(th);
                                 }
                             }
                             if (rs.has("jxFrom")) {

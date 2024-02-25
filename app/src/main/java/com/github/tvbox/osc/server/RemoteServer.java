@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.util.Base64;
 import androidx.annotation.DrawableRes;
+import com.github.tvbox.osc.BuildConfig;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.api.ApiConfig;
 import com.github.tvbox.osc.base.App;
@@ -41,7 +42,6 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.greenrobot.eventbus.EventBus;
-import com.github.tvbox.osc.BuildConfig;
 
 /**
  * @author pj567
@@ -145,7 +145,7 @@ public class RemoteServer extends NanoHTTPD {
                                     response.addHeader(key, headers.get(key));
                                 }
                             } catch (Throwable th) {
-                                th.printStackTrace();
+                                com.github.tvbox.osc.util.LOG.e(th);
                             }
                         }
                         return response;                        
@@ -325,7 +325,7 @@ public class RemoteServer extends NanoHTTPD {
                     }
                 }
             } catch (SocketException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
         } else {
             return String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff), (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));

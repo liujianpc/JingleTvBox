@@ -47,7 +47,8 @@ public class EpgUtil {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.e(e);
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -61,7 +62,7 @@ public class EpgUtil {
                 };
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.e(ex);
         }
         return null;
     }

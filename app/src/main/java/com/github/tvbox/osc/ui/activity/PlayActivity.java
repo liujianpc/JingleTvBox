@@ -195,7 +195,7 @@ public class PlayActivity extends BaseActivity {
                 try {
                     st = mVodPlayerCfg.getInt("st");
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 long skip = st * 1000L;
                 if (CacheManager.getCache(MD5.string2MD5(url)) == null) {
@@ -276,7 +276,7 @@ public class PlayActivity extends BaseActivity {
                 try {
                     selectMySubtitle();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
 
@@ -856,7 +856,7 @@ public class PlayActivity extends BaseActivity {
                                 return;
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            com.github.tvbox.osc.util.LOG.e(e);
                         }
                         hideTip();
                         if (url.startsWith("data:application/dash+xml;base64,")) {
@@ -1491,7 +1491,7 @@ public class PlayActivity extends BaseActivity {
                 parseThreadPool.shutdown();
                 parseThreadPool = null;
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
             }
         }
     }
@@ -1532,7 +1532,7 @@ public class PlayActivity extends BaseActivity {
                         if (reqHeaders.size() > 0) webHeaderMap = reqHeaders;
                     }
                 } catch (Throwable e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
             loadWebView(pb.getUrl() + webUrl);
@@ -1551,7 +1551,7 @@ public class PlayActivity extends BaseActivity {
                     }
                 }
             } catch (Throwable e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
             OkGo.<String>get(pb.getUrl() + encodeUrl(webUrl))
                     .tag("json_jx")
@@ -1589,7 +1589,7 @@ public class PlayActivity extends BaseActivity {
                                 }
                                 playUrl(rs.getString("url"), headers);
                             } catch (Throwable e) {
-                                e.printStackTrace();
+                                com.github.tvbox.osc.util.LOG.e(e);
                                 errorWithRetry("解析错误", false);
 //                                setTip("解析错误", false, true);
                             }
@@ -1851,7 +1851,7 @@ public class PlayActivity extends BaseActivity {
                     return sp.isVideoFormat(url);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return VideoParseRuler.checkIsVideoForParse(webUrl, url);
     }

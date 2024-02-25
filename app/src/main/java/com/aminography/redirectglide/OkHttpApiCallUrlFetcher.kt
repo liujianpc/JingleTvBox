@@ -2,6 +2,7 @@ package com.aminography.redirectglide
 
 import com.bumptech.glide.load.HttpException
 import com.bumptech.glide.load.model.GlideUrl
+import com.github.tvbox.osc.util.LOG
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -23,7 +24,7 @@ class OkHttpApiCallUrlFetcher(
                 callback?.onDataReady(GlideUrl(sourceUrl))
             } catch (e: IOException) {
                 callback?.onLoadFailed(HttpException(response.message(), response.code()))
-                e.printStackTrace()
+                LOG.e(e)
             }
         } else {
             callback?.onLoadFailed(HttpException(response.message(), response.code()))

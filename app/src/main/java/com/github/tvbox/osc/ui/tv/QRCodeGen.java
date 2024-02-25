@@ -36,7 +36,7 @@ public class QRCodeGen {
             }
             return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.RGB_565);
         } catch (WriterException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }

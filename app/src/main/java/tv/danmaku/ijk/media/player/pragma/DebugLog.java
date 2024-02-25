@@ -17,6 +17,7 @@
 
 package tv.danmaku.ijk.media.player.pragma;
 
+import com.github.tvbox.osc.util.LOG;
 import java.util.Locale;
 
 
@@ -127,7 +128,7 @@ public class DebugLog {
 
     public static void printStackTrace(Throwable e) {
         if (ENABLE_WARN) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
 

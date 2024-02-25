@@ -449,7 +449,7 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
                             }
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        com.github.tvbox.osc.util.LOG.e(e);
                     }
                     over = true;
                 }
@@ -482,7 +482,7 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
                 fileOutputStream.write(("file '" + matcher.group(1) + "'\nduration " + matcher.group(2) + "\n").getBytes());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return str2;
     }
@@ -966,7 +966,7 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
         try {
             mediaInfo.mMeta = IjkMediaMeta.parse(_getMediaMeta());
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return mediaInfo;
     }

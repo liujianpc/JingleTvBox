@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.github.tvbox.osc.base.App;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.LocalIPAddress;
 import com.p2p.P2PClass;
 
@@ -61,7 +62,7 @@ public class Jianpian {
                 .P2Pdoxdel(App.burl.getBytes("GBK"));
             App.burl = "";
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
 

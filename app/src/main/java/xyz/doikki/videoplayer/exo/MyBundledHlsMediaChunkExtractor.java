@@ -17,6 +17,7 @@ import androidx.media3.extractor.ts.Ac3Extractor;
 import androidx.media3.extractor.ts.Ac4Extractor;
 import androidx.media3.extractor.ts.AdtsExtractor;
 
+import com.github.tvbox.osc.util.LOG;
 import com.google.androidx.media3.exoplayer.extractor.ts.MyTsExtractor;
 
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class MyBundledHlsMediaChunkExtractor implements HlsMediaChunkExtractor {
         try {
             return this.extractor.read(extractorInput, POSITION_HOLDER) == Extractor.RESULT_CONTINUE;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.e(e);
             if (e instanceof androidx.media3.common.ParserException) {
                 return false;
             }

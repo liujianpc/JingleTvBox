@@ -27,7 +27,7 @@ public class LivePlayerManager {
             defaultPlayerConfig.put("pr", Hawk.get(HawkConfig.PLAY_RENDER, 0));
             defaultPlayerConfig.put("sc", Hawk.get(HawkConfig.PLAY_SCALE, 0));
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         getDefaultLiveChannelPlayer(videoView);
     }
@@ -37,7 +37,7 @@ public class LivePlayerManager {
         try {
             currentPlayerConfig = new JSONObject(defaultPlayerConfig.toString());
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -60,7 +60,7 @@ public class LivePlayerManager {
                 PlayerHelper.updateCfg(videoView, playerConfig);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
 
         currentPlayerConfig = playerConfig;
@@ -86,7 +86,7 @@ public class LivePlayerManager {
                     break;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return playerTypeIndex;
     }
@@ -95,7 +95,7 @@ public class LivePlayerManager {
         try {
             return currentPlayerConfig.getInt("sc");
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return 0;
     }
@@ -122,7 +122,7 @@ public class LivePlayerManager {
                     break;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         PlayerHelper.updateCfg(videoView, playerConfig);
 
@@ -141,7 +141,7 @@ public class LivePlayerManager {
         try {
             playerConfig.put("sc", playerScale);
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         if (playerConfig.toString().equals(defaultPlayerConfig.toString()))
             Hawk.delete(channelName);

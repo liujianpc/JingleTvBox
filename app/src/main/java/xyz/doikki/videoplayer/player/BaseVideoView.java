@@ -381,7 +381,7 @@ public class BaseVideoView<P extends AbstractPlayer> extends FrameLayout
                 try {
                     mAssetFileDescriptor.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
             //关闭AudioFocus监听

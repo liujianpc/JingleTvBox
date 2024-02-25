@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
+import com.github.tvbox.osc.util.LOG;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -155,7 +156,7 @@ public class AndroidMediaPlayer extends AbstractMediaPlayer {
             try {
                 mMediaDataSource.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.e(e);
             }
             mMediaDataSource = null;
         }

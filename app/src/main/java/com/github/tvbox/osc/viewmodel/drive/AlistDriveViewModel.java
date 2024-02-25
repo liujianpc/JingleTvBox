@@ -1,6 +1,7 @@
 package com.github.tvbox.osc.viewmodel.drive;
 
 import com.github.tvbox.osc.bean.DriveFolderFile;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.UA;
 import com.github.tvbox.osc.util.urlhttp.OkHttpUtil;
 import com.google.gson.JsonElement;
@@ -51,7 +52,7 @@ public class AlistDriveViewModel extends AbstractDriveViewModel {
                 return url.getProtocol() + "://" + url.getHost() + str2;
 
             } catch (Exception e) {
-                e.printStackTrace();
+                LOG.e(e);
             }
         }
         return "";
@@ -123,7 +124,7 @@ public class AlistDriveViewModel extends AbstractDriveViewModel {
                                                         driveFile.fileUrl = fileUrl;
                                                     items.add(driveFile);
                                                 } catch (ParseException e) {
-                                                    e.printStackTrace();
+                                                    LOG.e(e);
                                                 }
                                             }
                                         }
@@ -179,7 +180,7 @@ public class AlistDriveViewModel extends AbstractDriveViewModel {
                                                             dateFormat.parse(fileObj.get("modified").getAsString()).getTime());
                                                     items.add(driveFile);
                                                 } catch (ParseException e) {
-                                                    e.printStackTrace();
+                                                    LOG.e(e);
                                                 }
                                             }
                                         }
@@ -198,7 +199,7 @@ public class AlistDriveViewModel extends AbstractDriveViewModel {
                             });
                         }
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        LOG.e(ex);
                     }
                 }
             }.start();
@@ -224,7 +225,7 @@ public class AlistDriveViewModel extends AbstractDriveViewModel {
                 }
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOG.e(e);
             callback.fail(e.getMessage());
         }
 

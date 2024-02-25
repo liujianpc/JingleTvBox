@@ -130,7 +130,7 @@ public abstract class CallBackUtil<T> {
             try {
                 data = input2byte(inputStream);
             } catch (IOException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
@@ -219,7 +219,7 @@ public abstract class CallBackUtil<T> {
                 return file;
 
             } catch (Exception e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             } finally {
                 try {
                     fos.close();

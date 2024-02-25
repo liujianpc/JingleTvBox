@@ -238,7 +238,7 @@ public class FormatTTML implements TimedTextFileFormat {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             //this could be a fatal error...
             throw new FatalParsingException("Error during parsing: " + e.getMessage());
         }

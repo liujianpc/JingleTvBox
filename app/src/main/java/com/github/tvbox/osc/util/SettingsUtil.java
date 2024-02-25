@@ -17,14 +17,14 @@ public class SettingsUtil {
         try {
             Hawk.put(str, obj);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
     public static void hkDel(String str) {
         try {
             Hawk.delete(str);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
     }
 }

@@ -186,7 +186,7 @@ public class FormatSTL implements TimedTextFileFormat {
 
         } catch (Exception e) {
             //format error
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             throw new FatalParsingException("Format error in the file, migth be due to corrupt data.\n" + e.getMessage());
         }
 

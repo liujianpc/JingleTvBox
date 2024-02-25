@@ -107,7 +107,7 @@ public class XWalkUtils {
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
             return false;
         }
         return true;
@@ -181,7 +181,7 @@ public class XWalkUtils {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return result;
     }

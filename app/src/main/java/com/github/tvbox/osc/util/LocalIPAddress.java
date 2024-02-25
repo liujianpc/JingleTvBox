@@ -42,7 +42,7 @@ public class LocalIPAddress {
                     }
                 }
             } catch (SocketException e) {
-                e.printStackTrace();
+                LOG.e(e);
             }
         } else {
             return String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff), (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
@@ -63,11 +63,11 @@ public class LocalIPAddress {
             }
             return intToIp(ipAddress);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
             try {
                 return getLocalIPAddress();
             } catch (Exception e1) {
-                e1.printStackTrace();
+                LOG.e(e1);
             }
         }
         return "127.0.0.1";

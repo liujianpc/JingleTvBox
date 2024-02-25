@@ -56,6 +56,7 @@ import com.github.tvbox.osc.ui.fragment.PlayFragment;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
 import com.github.tvbox.osc.util.HawkConfig;
 import com.github.tvbox.osc.util.ImgUtil;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.SearchHelper;
 import com.github.tvbox.osc.util.SubtitleHelper;
 import com.github.tvbox.osc.util.thunder.Thunder;
@@ -374,7 +375,7 @@ public class DetailActivity extends BaseActivity {
                                 searchExecutorService = null;
                             }
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                     }
                 });
@@ -590,7 +591,7 @@ public class DetailActivity extends BaseActivity {
                         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
                         previewVodInfo = (VodInfo) ois.readObject();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        com.github.tvbox.osc.util.LOG.e(e);
                     }
                 }
                 if (previewVodInfo != null) {
@@ -1020,7 +1021,7 @@ public class DetailActivity extends BaseActivity {
                                 quickSearchWord.add(je.getAsJsonObject().get("word").getAsString());
                             }
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                         quickSearchWord.add(searchTitle);
                         EventBus.getDefault().post(new RefreshEvent(RefreshEvent.TYPE_QUICK_SEARCH_WORD, quickSearchWord));
@@ -1042,7 +1043,7 @@ public class DetailActivity extends BaseActivity {
                 searchExecutorService = null;
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         searchExecutorService = Executors.newFixedThreadPool(5);
         List<SourceBean> searchRequestList = new ArrayList<>();
@@ -1109,7 +1110,7 @@ public class DetailActivity extends BaseActivity {
                 searchExecutorService = null;
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         OkGo.getInstance().cancelTag("fenci");
         OkGo.getInstance().cancelTag("detail");

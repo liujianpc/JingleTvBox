@@ -36,7 +36,7 @@ public class AES {
             cipher.init(Cipher.DECRYPT_MODE, keySpec);
             return new String(cipher.doFinal(data2));
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }
@@ -49,7 +49,7 @@ public class AES {
             cipher.init(Cipher.DECRYPT_MODE, keySpec, paramSpec);
             return new String(cipher.doFinal(toBytes(data)));
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }

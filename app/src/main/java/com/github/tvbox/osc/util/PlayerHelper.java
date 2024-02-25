@@ -35,7 +35,7 @@ public class PlayerHelper {
             ijkCode = playerCfg.getString("ijk");
             scale = playerCfg.getInt("sc");
         } catch (JSONException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         if(forcePlayerType>=0)playerType = forcePlayerType;
         IJKCode codec = ApiConfig.get().getIJKCodec(ijkCode);

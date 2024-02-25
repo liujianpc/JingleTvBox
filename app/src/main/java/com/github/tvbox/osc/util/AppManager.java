@@ -130,7 +130,7 @@ public class AppManager {
             System.exit(code);
         } catch (Exception e) {
             activityStack.clear();
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 }

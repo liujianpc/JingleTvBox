@@ -66,7 +66,7 @@ public class XWalkInitDialog extends BaseDialog {
                                 listener.onchange();
                             dismiss();
                         } catch (Throwable e) {
-                            e.printStackTrace();
+                            com.github.tvbox.osc.util.LOG.e(e);
                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                             setTextEnable(true);
                         }

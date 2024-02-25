@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.github.catvod.crawler.JsLoader;
 import com.github.tvbox.osc.R;
@@ -25,10 +23,9 @@ import com.github.tvbox.osc.ui.adapter.FastListAdapter;
 import com.github.tvbox.osc.ui.adapter.FastSearchAdapter;
 import com.github.tvbox.osc.ui.adapter.SearchWordAdapter;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.SearchHelper;
 import com.github.tvbox.osc.viewmodel.SourceViewModel;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -38,18 +35,15 @@ import com.lzy.okgo.model.Response;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager;
 import com.owen.tvrecyclerview.widget.V7LinearLayoutManager;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @author pj567
@@ -193,7 +187,7 @@ public class FastSearchActivity extends BaseActivity {
                             JsLoader.stopAll();
                         }
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                     }
                     Bundle bundle = new Bundle();
                     bundle.putString("id", video.id);
@@ -219,7 +213,7 @@ public class FastSearchActivity extends BaseActivity {
                             JsLoader.stopAll();
                         }
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                     }
                     Bundle bundle = new Bundle();
                     bundle.putString("id", video.id);
@@ -295,7 +289,7 @@ public class FastSearchActivity extends BaseActivity {
                                 quickSearchWord.add(je.getAsJsonObject().get("word").getAsString());
                             }
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                         quickSearchWord.add(searchTitle);
                         EventBus.getDefault().post(new RefreshEvent(RefreshEvent.TYPE_QUICK_SEARCH_WORD, quickSearchWord));
@@ -383,7 +377,7 @@ public class FastSearchActivity extends BaseActivity {
                 JsLoader.stopAll();
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         } finally {
             searchAdapter.setNewData(new ArrayList<>());
             searchAdapterFilter.setNewData(new ArrayList<>());
@@ -502,7 +496,7 @@ public class FastSearchActivity extends BaseActivity {
                 JsLoader.load();
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         EventBus.getDefault().unregister(this);
     }

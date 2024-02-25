@@ -52,6 +52,7 @@ import com.github.tvbox.osc.ui.dialog.LivePasswordDialog;
 import com.github.tvbox.osc.util.EpgUtil;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.live.TxtSubscribe;
 import com.google.gson.JsonArray;
 import com.lzy.okgo.OkGo;
@@ -821,7 +822,7 @@ public class LivePlayActivity extends BaseActivity {
                     }
 
                 } catch (JSONException jSONException) {
-                    jSONException.printStackTrace();
+                    LOG.e(jSONException);
                 }
                 showEpg(date, arrayList);
 
@@ -1651,7 +1652,7 @@ public class LivePlayActivity extends BaseActivity {
                                     liveURL = "http://127.0.0.1:9978/proxy?do=live&type=txt&ext=" + liveURL;
                                     loadProxyLives(liveURL);
                                 } catch (Throwable th) {
-                                    th.printStackTrace();
+                                    LOG.e(th);
                                 }
                                 dialog.dismiss();
                             }

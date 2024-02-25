@@ -22,6 +22,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import com.github.tvbox.osc.util.LOG;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -245,7 +246,7 @@ public final class PlayerUtils {
             return (Application) Class.forName("android.app.ActivityThread")
                     .getMethod("currentApplication").invoke(null);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return null;
     }

@@ -146,7 +146,7 @@ public class ImgUtil {
             try {
                 header = URLDecoder.decode(header, "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
         }
         if (url.contains("@Cookie=")) cookie = url.split("@Cookie=")[1].split("@")[0];
@@ -189,7 +189,7 @@ public class ImgUtil {
             String host = imgUrl.getHost();
             builder.addHeader(HttpHeaders.HOST, host);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
 
         return new GlideUrl(url, builder.build());

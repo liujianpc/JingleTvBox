@@ -231,7 +231,7 @@ import java.util.Map;
         if(conn != null){
             conn.disconnect();
         }
-        e.printStackTrace();
+        com.github.tvbox.osc.util.LOG.e(e);
         RealResponse response = new RealResponse();
         response.exception = e;
         return response;

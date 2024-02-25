@@ -44,7 +44,7 @@ public class FileUtils {
             bos.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return false;
     }
@@ -58,7 +58,7 @@ public class FileUtils {
             bis.close();
             return data;
         } catch (IOException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }
@@ -75,7 +75,7 @@ public class FileUtils {
                 jsonString.append(thisLine);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         } finally {
             if (in != null) {
                 try {
@@ -116,7 +116,7 @@ public class FileUtils {
             }
             file.delete();
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -161,7 +161,7 @@ public class FileUtils {
                 return get("http://" + substring.substring(0, indexOf) + "/file/" + substring.substring(indexOf + 1));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             return name;
         }
         return name;
@@ -175,7 +175,7 @@ public class FileUtils {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return false;
     }
@@ -187,7 +187,7 @@ public class FileUtils {
             is.read(data);
             return new String(data, "UTF-8");
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return "";
     }
@@ -232,7 +232,7 @@ public class FileUtils {
             jSONObject.put("data", data);
             writeSimple(jSONObject.toString().getBytes(), open(name));
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -240,7 +240,7 @@ public class FileUtils {
         try {
             writeSimple(byteMerger("//DRPY".getBytes(),Base64.encode(data, Base64.URL_SAFE)), open("B_" + name));
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 

@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.github.tvbox.osc.base.App;
 
+import com.github.tvbox.osc.util.LOG;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -71,7 +72,7 @@ public class ReexPlayer {
                 }
                 intent.putExtra("reex.extra.http_header", json.toString());
             } catch (JSONException e) {
-                e.printStackTrace();
+                LOG.e(e);
             }
         }
         if (subtitle != null && !subtitle.isEmpty()) {

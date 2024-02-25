@@ -24,6 +24,7 @@ import com.github.tvbox.osc.callback.LoadingCallback;
 import com.github.tvbox.osc.ui.activity.DetailActivity;
 import com.github.tvbox.osc.util.AppManager;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.LocaleHelper;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
@@ -77,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
                 screenRatio = (float) Math.max(screenWidth, screenHeight) / (float) Math.min(screenWidth, screenHeight);
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
 
         // takagen99 : Set Theme Color
@@ -196,7 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
         try {
             has = PermissionChecker.checkSelfPermission(this, permission) == PermissionChecker.PERMISSION_GRANTED;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return has;
     }
@@ -265,7 +266,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
             }
             return stringBuilder.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return "";
     }
@@ -338,7 +339,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
                 globalWp = null;
             }
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            LOG.e(throwable);
             globalWp = null;
         }
         if (globalWp != null) {

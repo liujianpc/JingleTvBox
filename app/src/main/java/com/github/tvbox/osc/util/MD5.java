@@ -97,9 +97,9 @@ public class MD5 {
                 sb.append(Integer.toHexString(d));
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOG.e(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return sb.toString();
     }

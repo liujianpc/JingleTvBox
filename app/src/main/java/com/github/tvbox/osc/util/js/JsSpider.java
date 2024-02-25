@@ -246,7 +246,7 @@ public class JsSpider extends Spider {
             if (classes.length == 0) invokeSingle(clz, obj);
             if (classes.length >= 1) invokeMultiple(clz, obj);
         } catch (Throwable e) {
-            e.printStackTrace();
+            LOG.e(e);
             LOG.e(e);
         }
     }

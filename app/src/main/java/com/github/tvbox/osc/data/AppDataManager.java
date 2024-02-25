@@ -47,7 +47,7 @@ public class AppDataManager {
                 //database.execSQL("ALTER TABLE sourceState ADD COLUMN tidSort TEXT");
                 database.execSQL("CREATE TABLE IF NOT EXISTS `storageDrive` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `type` INTEGER NOT NULL, `configJson` TEXT)");
             } catch (SQLiteException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
         }
     };
@@ -71,7 +71,7 @@ public class AppDataManager {
                 //添加索引
                 database.execSQL("CREATE INDEX IF NOT EXISTS index_t_search_searchKeyWords ON t_search (searchKeyWords)");*/
             } catch (SQLiteException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
         }
     };

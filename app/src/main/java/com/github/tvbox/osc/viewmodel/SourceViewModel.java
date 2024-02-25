@@ -128,10 +128,10 @@ public class SourceViewModel extends ViewModel {
                     try {
                         sortJson = future.get(15, TimeUnit.SECONDS);
                     } catch (TimeoutException e) {
-                        e.printStackTrace();
+                        LOG.e(e);
                         future.cancel(true);
                     } catch (InterruptedException | ExecutionException e) {
-                        e.printStackTrace();
+                        LOG.e(e);
                     } finally {
                         if (sortJson != null) {
                             AbsSortXml sortXml = sortJson(sortResult, sortJson);
@@ -158,7 +158,7 @@ public class SourceViewModel extends ViewModel {
                         try {
                             executor.shutdown();
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                     }
                 }
@@ -276,7 +276,7 @@ public class SourceViewModel extends ViewModel {
                         Spider sp = ApiConfig.get().getCSP(homeSourceBean);
                         json(listResult, sp.categoryContent(sortData.id, page + "", true, sortData.filterSelect), homeSourceBean.getKey());
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                         listResult.postValue(null);
                     }
                 }
@@ -325,7 +325,7 @@ public class SourceViewModel extends ViewModel {
                     ext = Base64.encodeToString(new JSONObject(sortData.filterSelect).toString().getBytes("UTF-8"), Base64.DEFAULT | Base64.NO_WRAP);
                     LOG.i(ext);
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             OkGo.<String>get(homeSourceBean.getApi())
@@ -386,10 +386,10 @@ public class SourceViewModel extends ViewModel {
                     try {
                         sortJson = future.get(15, TimeUnit.SECONDS);
                     } catch (TimeoutException e) {
-                        e.printStackTrace();
+                        LOG.e(e);
                         future.cancel(true);
                     } catch (InterruptedException | ExecutionException e) {
-                        e.printStackTrace();
+                        LOG.e(e);
                     } finally {
                         if (sortJson != null) {
                             AbsXml absXml = json(null, sortJson, sourceBean.getKey());
@@ -404,7 +404,7 @@ public class SourceViewModel extends ViewModel {
                         try {
                             executor.shutdown();
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                     }
                 }
@@ -463,7 +463,7 @@ public class SourceViewModel extends ViewModel {
                 try {
                     pushUrl = new String(Base64.decode(pushUrl.substring(4), Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             } else {
                 pushUrl = URLDecoder.decode(pushUrl);
@@ -489,7 +489,7 @@ public class SourceViewModel extends ViewModel {
                         ids.add(id);
                         json(detailResult, sp.detailContent(ids), sourceBean.getKey());
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                         detailResult.postValue(null);
                     }
                 }
@@ -547,7 +547,7 @@ public class SourceViewModel extends ViewModel {
                     json(searchResult, "", sourceBean.getKey());
                 }
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
                 json(searchResult, "", sourceBean.getKey());
             }
         } else if (type == 0 || type == 1) {
@@ -627,7 +627,7 @@ public class SourceViewModel extends ViewModel {
                 Spider sp = ApiConfig.get().getCSP(sourceBean);
                 json(quickSearchResult, sp.searchContent(wd, true), sourceBean.getKey());
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
             }
         } else if (type == 0 || type == 1) {
             OkGo.<String>get(sourceBean.getApi())
@@ -716,7 +716,7 @@ public class SourceViewModel extends ViewModel {
                             result.put("flag", playFlag);
                         playResult.postValue(result);
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                         playResult.postValue(null);
                     }
                 }
@@ -739,7 +739,7 @@ public class SourceViewModel extends ViewModel {
                 result.put("flag", playFlag);
                 playResult.postValue(result);
             } catch (Throwable th) {
-                th.printStackTrace();
+                LOG.e(th);
                 playResult.postValue(null);
             }
         } else if (type == 4) {
@@ -770,7 +770,7 @@ public class SourceViewModel extends ViewModel {
                                     result.put("flag", playFlag);
                                 playResult.postValue(result);
                             } catch (Throwable th) {
-                                th.printStackTrace();
+                                LOG.e(th);
                                 playResult.postValue(null);
                             }
                         }
@@ -911,7 +911,7 @@ public class SourceViewModel extends ViewModel {
                                     try {
                                         pushUrl = new String(Base64.decode(pushUrl.substring(4), Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP), "UTF-8");
                                     } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
+                                        com.github.tvbox.osc.util.LOG.e(e);
                                     }
                                 } else {
                                     pushUrl = URLDecoder.decode(pushUrl);
@@ -955,7 +955,7 @@ public class SourceViewModel extends ViewModel {
                                                                     resData[0] = absJson.toAbsXml();
                                                                     absXml(resData[0], sb.getKey());
                                                                 } catch (Exception e) {
-                                                                    e.printStackTrace();
+                                                                    com.github.tvbox.osc.util.LOG.e(e);
                                                                 }
                                                             }
                                                             countDownLatch.countDown();
@@ -980,11 +980,11 @@ public class SourceViewModel extends ViewModel {
                                                         resData[0] = absJson.toAbsXml();
                                                         absXml(resData[0], sb.getKey());
                                                     } catch (Exception e) {
-                                                        e.printStackTrace();
+                                                        com.github.tvbox.osc.util.LOG.e(e);
                                                     }
                                                 }
                                             } catch (Throwable th) {
-                                                th.printStackTrace();
+                                                LOG.e(th);
                                             }
                                             countDownLatch.countDown();
                                         }
@@ -994,7 +994,7 @@ public class SourceViewModel extends ViewModel {
                                     countDownLatch.await(15, TimeUnit.SECONDS);
                                     threadPool.shutdown();
                                 } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                                    com.github.tvbox.osc.util.LOG.e(e);
                                 }
                                 if (resData[0] != null) {
                                     AbsXml res = resData[0];

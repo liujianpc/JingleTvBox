@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+import com.github.tvbox.osc.util.LOG;
 import java.util.Map;
 import xyz.doikki.videoplayer.util.PlayerUtils;
 /**
@@ -140,7 +141,7 @@ public class AndroidMediaPlayer extends AbstractPlayer implements MediaPlayer.On
                 try {
                     mediaPlayer.release();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
         }.start();

@@ -14,18 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.github.catvod.crawler.JsLoader;
 import com.github.tvbox.osc.R;
@@ -51,6 +48,7 @@ import com.github.tvbox.osc.ui.tv.widget.CustomEditText;
 import com.github.tvbox.osc.ui.tv.widget.SearchKeyboard;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.SearchHelper;
 import com.github.tvbox.osc.util.SettingsUtil;
 import com.github.tvbox.osc.viewmodel.SourceViewModel;
@@ -59,7 +57,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.model.Response;
@@ -67,21 +64,18 @@ import com.orhanobut.hawk.Hawk;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager;
 import com.owen.tvrecyclerview.widget.V7LinearLayoutManager;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.jetbrains.annotations.NotNull;
-
+import com.yang.flowlayoutlibrary.FlowLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import com.yang.flowlayoutlibrary.FlowLayout;
-
 import me.jessyan.autosize.utils.AutoSizeUtils;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author pj567
@@ -245,7 +239,7 @@ public class SearchActivity extends BaseActivity {
                             sourceViewModel.destroyExecutor();
                         }
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                     }
                     Bundle bundle = new Bundle();
                     bundle.putString("id", video.id);
@@ -545,7 +539,7 @@ public class SearchActivity extends BaseActivity {
                             wordAdapter.setNewData(hots);
                             mGridViewWord.smoothScrollToPosition(0);
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                     }
 
@@ -605,7 +599,7 @@ public class SearchActivity extends BaseActivity {
                             }
                             wordAdapter.setNewData(hots);
                         } catch (Throwable th) {
-                            th.printStackTrace();
+                            LOG.e(th);
                         }
                     }
 
@@ -669,7 +663,7 @@ public class SearchActivity extends BaseActivity {
         try {
             sourceViewModel.initExecutor();
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         } finally {
             searchAdapter.setNewData(new ArrayList<>());
             allRunCount.set(0);
@@ -764,7 +758,7 @@ public class SearchActivity extends BaseActivity {
                 JsLoader.load();
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         EventBus.getDefault().unregister(this);
     }

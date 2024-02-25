@@ -146,9 +146,9 @@ public class ShellUtils {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         } finally {
             try {
                 if (os != null) {
@@ -161,7 +161,7 @@ public class ShellUtils {
                     errorResult.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
             if (process != null) {
                 process.destroy();

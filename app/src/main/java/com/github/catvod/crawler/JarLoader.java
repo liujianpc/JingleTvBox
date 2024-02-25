@@ -3,6 +3,7 @@ package com.github.catvod.crawler;
 import android.content.Context;
 
 import com.github.tvbox.osc.base.App;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.MD5;
 import com.lzy.okgo.OkGo;
 
@@ -55,7 +56,7 @@ public class JarLoader {
                     if (classInit != null) {
                         Method method = classInit.getMethod("init", Context.class);
                         method.invoke(null, App.getInstance());
-                        System.out.println("自定义爬虫代码加载成功!");
+                        LOG.i("自定义爬虫代码加载成功!");
                         success = true;
                         try {
                             Class proxy = classLoader.loadClass("com.github.catvod.spider.Proxy");
@@ -68,7 +69,7 @@ public class JarLoader {
                     }
                     Thread.sleep(200);
                 } catch (Throwable th) {
-                    th.printStackTrace();
+                    LOG.e(th);
                 }
                 count++;
             } while (count < 5);
@@ -77,7 +78,7 @@ public class JarLoader {
                 classLoaders.put(key, classLoader);
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         return success;
     }
@@ -107,13 +108,13 @@ public class JarLoader {
                     is.close();
                     os.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             loadClassLoader(cache.getAbsolutePath(), key);
             return classLoaders.get(key);
         } catch (Throwable e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return null;
     }
@@ -151,7 +152,7 @@ public class JarLoader {
             spiders.put(key, sp);
             return sp;
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         return new SpiderNull();
     }
@@ -165,7 +166,7 @@ public class JarLoader {
             Method mth = jsonParserCls.getMethod("parse", LinkedHashMap.class, String.class);
             return (JSONObject) mth.invoke(null, jxs, url);
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         return null;
     }
@@ -179,7 +180,7 @@ public class JarLoader {
             Method mth = jsonParserCls.getMethod("parse", LinkedHashMap.class, String.class, String.class, String.class);
             return (JSONObject) mth.invoke(null, jxs, name, flag, url);
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         return null;
     }

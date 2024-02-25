@@ -72,7 +72,7 @@ public class DefaultConfig {
             PackageInfo packageInfo = pm.getPackageInfo(mContext.getPackageName(), 0);
             return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return -1;
     }
@@ -139,7 +139,7 @@ public class DefaultConfig {
             PackageInfo packageInfo = pm.getPackageInfo(mContext.getPackageName(), 0);
             return packageInfo.packageName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return "";
     }
@@ -150,7 +150,7 @@ public class DefaultConfig {
             PackageInfo packageInfo = pm.getPackageInfo(mContext.getPackageName(), 0);
             return packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return "";
     }

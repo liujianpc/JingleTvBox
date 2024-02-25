@@ -337,7 +337,7 @@ public class RSAEncrypt {
      * 处理异常
      */
     private static void handleException(Exception e) {
-        e.printStackTrace();
+        com.github.tvbox.osc.util.LOG.e(e);
         Log.e(TAG, TAG + e);
     }
 }

@@ -7,10 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-
-import java.io.IOException;
+import com.github.tvbox.osc.util.LOG;
 import java.util.Map;
-
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 import tv.danmaku.ijk.media.player.misc.ITrackInfo;
@@ -145,7 +143,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
                 try {
                     mMediaPlayer.release();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
         }.start();

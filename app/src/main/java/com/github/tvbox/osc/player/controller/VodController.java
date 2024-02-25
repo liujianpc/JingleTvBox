@@ -44,6 +44,7 @@ import com.github.tvbox.osc.ui.adapter.SelectDialogAdapter;
 import com.github.tvbox.osc.ui.dialog.SelectDialog;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.PlayerHelper;
 import com.github.tvbox.osc.util.ScreenUtils;
 import com.github.tvbox.osc.util.SubtitleHelper;
@@ -213,7 +214,7 @@ public class VodController extends BaseController {
                                 float speed = (float) mPlayerConfig.getDouble("sp");
                                 mControlWrapper.setSpeed(speed);
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                com.github.tvbox.osc.util.LOG.e(e);
                             }
                         } else
                             mHandler.sendEmptyMessageDelayed(1004, 100);
@@ -560,7 +561,7 @@ public class VodController extends BaseController {
                     float speed = (float) mPlayerConfig.getDouble("sp");
                     increasePlaySpeed(speed);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -638,7 +639,7 @@ public class VodController extends BaseController {
                     mControlWrapper.setScreenScaleType(scaleType);
 //                    Toast.makeText(getContext(), PlayerHelper.getScaleName(mPlayerConfig.getInt("sc")), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -683,7 +684,7 @@ public class VodController extends BaseController {
 //                    listener.replay(false);
 //                    // hideBottom();
 //                } catch (JSONException e) {
-//                    e.printStackTrace();
+//                    com.github.tvbox.osc.util.LOG.e(e);
 //                }
 //                mPlayerBtn.requestFocus();
 //            }
@@ -721,7 +722,7 @@ public class VodController extends BaseController {
                                 listener.updatePlayerCfg();
                                 listener.replay(false);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                com.github.tvbox.osc.util.LOG.e(e);
                             }
                         }
 
@@ -742,7 +743,7 @@ public class VodController extends BaseController {
                     }, players, defaultPos);
                     dialog.show();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -769,7 +770,7 @@ public class VodController extends BaseController {
                     listener.replay(false);
                     // hideBottom();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 mPlayerIJKBtn.requestFocus();
             }
@@ -821,7 +822,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -834,7 +835,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 Toast.makeText(getContext(), "已预设片头片尾", Toast.LENGTH_SHORT).show();
                 return true;
@@ -862,7 +863,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -875,7 +876,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 return true;
             }
@@ -902,7 +903,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -915,7 +916,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 return true;
             }
@@ -951,7 +952,7 @@ public class VodController extends BaseController {
                     Hawk.put(HawkConfig.PLAYER_BRIGHTNESS, 0);
                     updatePlayerCfgView();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
                 return true;
             }
@@ -1019,7 +1020,7 @@ public class VodController extends BaseController {
                     updatePlayerCfgView();
                     listener.updatePlayerCfg();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                 }
             }
         });
@@ -1103,7 +1104,7 @@ public class VodController extends BaseController {
 //            mSubtitleBtn.setVisibility(playerType == 1 ? VISIBLE : GONE);
 //            mAudioTrackBtn.setVisibility(playerType == 1 ? VISIBLE : GONE);
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -1160,7 +1161,7 @@ public class VodController extends BaseController {
             try {
                 et = mPlayerConfig.getInt("et");
             } catch (JSONException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
             if (et > 0 && position + (et * 1000) >= duration) {
                 skipEnd = false;
@@ -1359,7 +1360,7 @@ public class VodController extends BaseController {
             listener.updatePlayerCfg();
             mControlWrapper.setSpeed(value);
         } catch (JSONException err) {
-            err.printStackTrace();
+            LOG.e(err);
         }
     }
 
@@ -1381,7 +1382,7 @@ public class VodController extends BaseController {
             updatePlayerCfgView();
             listener.updatePlayerCfg();
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -1403,7 +1404,7 @@ public class VodController extends BaseController {
             updatePlayerCfgView();
             listener.updatePlayerCfg();
         } catch (JSONException e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -1473,14 +1474,14 @@ public class VodController extends BaseController {
                         float speed = (float) mPlayerConfig.getDouble("sp");
                         increasePlaySpeed(speed);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        com.github.tvbox.osc.util.LOG.e(e);
                     }
                 } else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
                     try {
                         float speed = (float) mPlayerConfig.getDouble("sp");
                         decreasePlaySpeed(speed);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        com.github.tvbox.osc.util.LOG.e(e);
                     }
                 }
             }
@@ -1536,7 +1537,7 @@ public class VodController extends BaseController {
                 }
                 setPlaySpeed(mSpeed);
             } catch (JSONException f) {
-                f.printStackTrace();
+                LOG.e(f);
             }
         }
     }

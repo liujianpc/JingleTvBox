@@ -19,6 +19,7 @@ import com.github.tvbox.osc.ui.activity.*;
 import com.github.tvbox.osc.ui.adapter.HomeHotVodAdapter;
 import com.github.tvbox.osc.util.FastClickCheckUtil;
 import com.github.tvbox.osc.util.HawkConfig;
+import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.UA;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -296,7 +297,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
                 }
             });
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
     }
 

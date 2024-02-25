@@ -58,7 +58,7 @@ public class SubtitleViewModel extends ViewModel {
             subtitleData.setIsZip(isZip);
             searchResult.postValue(subtitleData);
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             searchResult.postValue(null);
             LOG.e(e);
         }
@@ -106,7 +106,7 @@ public class SubtitleViewModel extends ViewModel {
                                     }
                                 }
                             } catch (Throwable th) {
-                                th.printStackTrace();
+                                LOG.e(th);
                             }
                         }
 
@@ -122,7 +122,7 @@ public class SubtitleViewModel extends ViewModel {
                         }
                     });
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             LOG.e(e);
         }
     }
@@ -175,7 +175,7 @@ public class SubtitleViewModel extends ViewModel {
                             }
                         }
                     } catch (Throwable th) {
-                        th.printStackTrace();
+                        LOG.e(th);
                     }
                 }
 
@@ -191,7 +191,7 @@ public class SubtitleViewModel extends ViewModel {
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             LOG.e(e);
         }
     }
@@ -215,7 +215,7 @@ public class SubtitleViewModel extends ViewModel {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                com.github.tvbox.osc.util.LOG.e(e);
             }
 
             @Override

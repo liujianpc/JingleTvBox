@@ -53,13 +53,13 @@ public class JsLoader {
                 try {
                     classInit = classLoader.loadClass("com.github.catvod.js.Method");
                     if (classInit != null) {
-                        System.out.println("自定义jsapi加载成功!");
+                        LOG.i("自定义jsapi加载成功!");
                         success = true;
                         break;
                     }
                     Thread.sleep(200);
                 } catch (Throwable th) {
-                    th.printStackTrace();
+                    LOG.e(th);
                 }
                 count++;
             } while (count < 5);
@@ -68,7 +68,7 @@ public class JsLoader {
                 classs.put(key, classInit);
             }
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         return success;
     }
@@ -98,13 +98,13 @@ public class JsLoader {
                     is.close();
                     os.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             loadClassLoader(cache.getAbsolutePath(), key);
             return classs.get(key);
         } catch (Throwable e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return null;
     }
@@ -129,7 +129,7 @@ public class JsLoader {
             spiders.put(key, sp);
             return sp;
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
             LOG.e("QuJS", th);
         }
         return new SpiderNull();

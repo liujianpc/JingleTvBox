@@ -117,7 +117,7 @@ public class BackupDialog extends BaseDialog {
                 }
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return result;
     }
@@ -153,7 +153,7 @@ public class BackupDialog extends BaseDialog {
                 }
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 
@@ -189,7 +189,7 @@ public class BackupDialog extends BaseDialog {
                 backup.delete();
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
             Toast.makeText(getContext(), HomeActivity.getRes().getString(R.string.set_bkup_fail), Toast.LENGTH_SHORT).show();
         }
     }
@@ -201,7 +201,7 @@ public class BackupDialog extends BaseDialog {
             FileUtils.recursiveDelete(backup);
             Toast.makeText(getContext(), HomeActivity.getRes().getString(R.string.set_bkup_del), Toast.LENGTH_SHORT).show();
         } catch (Throwable e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
     }
 

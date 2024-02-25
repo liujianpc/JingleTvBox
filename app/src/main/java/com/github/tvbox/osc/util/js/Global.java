@@ -147,28 +147,28 @@ public class Global {
                 try {
                     mConfig = (String) op.get("config");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("type")) {
                 try {
                     mType = ((Double) op.get("type")).intValue();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("long")) {
                 try {
                     mLong = ((Double) op.get("long")).intValue();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("block")) {
                 try {
                     mBlock = (Boolean) op.get("block");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
         }
@@ -225,28 +225,28 @@ public class Global {
                 try {
                     mConfig = (String) op.get("config");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("type")) {
                 try {
                     mType = ((Double) op.get("type")).intValue();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("long")) {
                 try {
                     mLong = ((Double) op.get("long")).intValue();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
             if (op.has("block")) {
                 try {
                     mBlock = (Boolean) op.get("block");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOG.e(e);
                 }
             }
         }

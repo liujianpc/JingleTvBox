@@ -75,7 +75,7 @@ public class OkGoHelper {
         try {
             setOkHttpSsl(builder);
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         builder.dns(dnsOverHttps);
 
@@ -137,7 +137,7 @@ public class OkGoHelper {
         try {
             setOkHttpSsl(builder);
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
         builder.connectionSpecs(getConnectionSpec());
         builder.cache(new Cache(new File(App.getInstance().getCacheDir().getAbsolutePath(), "dohcache"), 10 * 1024 * 1024));
@@ -181,7 +181,7 @@ public class OkGoHelper {
         try {
             setOkHttpSsl(builder);
         } catch (Throwable th) {
-            th.printStackTrace();
+            LOG.e(th);
         }
 
         HttpHeaders.setUserAgent(Version.userAgent());

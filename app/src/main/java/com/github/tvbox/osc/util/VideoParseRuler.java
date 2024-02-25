@@ -60,7 +60,7 @@ public class VideoParseRuler {
             }
             return isVideo;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return false;
     }
@@ -107,7 +107,7 @@ public class VideoParseRuler {
             }
             return isFilter;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.e(e);
         }
         return false;
     }

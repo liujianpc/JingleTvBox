@@ -68,7 +68,7 @@ public class SubtitleLoader {
                     }
 
                 } catch (final Exception e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                     if (callback != null) {
                         AppTaskExecutor.mainThread().execute(new Runnable() {
                             @Override
@@ -100,7 +100,7 @@ public class SubtitleLoader {
                     }
 
                 } catch (final Exception e) {
-                    e.printStackTrace();
+                    com.github.tvbox.osc.util.LOG.e(e);
                     if (callback != null) {
                         AppTaskExecutor.mainThread().execute(new Runnable() {
                             @Override
@@ -127,7 +127,7 @@ public class SubtitleLoader {
                 return loadFromLocal(path);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            com.github.tvbox.osc.util.LOG.e(e);
         }
         return null;
     }
