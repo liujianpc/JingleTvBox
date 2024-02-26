@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootView"
+    android:id="@+id/rootView"    
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -37,7 +37,7 @@
                 android:layout_marginEnd="@dimen/vs_10"
                 android:layout_marginRight="@dimen/vs_10"
                 android:layout_marginBottom="@dimen/vs_4"
-                android:background="@color/color_theme" />
+                android:background="?attr/color_theme" />
 
             <TextView
                 android:id="@+id/tv_title_top"
@@ -170,7 +170,7 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    
     <LinearLayout
         android:id="@+id/tv_top_r_container"
         android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
         android:layout_gravity="right"
         android:background="@drawable/shape_user_pause"
         android:layout_marginRight="@dimen/vs_35"
-        android:layout_marginTop="@dimen/vs_8"
+        android:layout_marginTop="@dimen/vs_8"        
         android:orientation="horizontal">
 
         <TextView
@@ -193,12 +193,12 @@
             android:maxLines="1"
             android:paddingTop="@dimen/vs_5"
             android:paddingRight="@dimen/vs_2"
-            android:tag="play_speed_topr"
+            android:tag="play_speed_topr"            
             android:text="Speed"
             android:textColor="@color/color_FFFFFF_80"
             android:textStyle="bold"
             android:textSize="@dimen/ts_22" />
-
+            
         <TextView
             android:id="@+id/tv_MPBS_top"
             android:layout_width="wrap_content"
@@ -207,11 +207,11 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingTop="@dimen/vs_5"
-            android:paddingRight="@dimen/vs_10"
+            android:paddingRight="@dimen/vs_10"            
             android:text="Mbps"
             android:textColor="@color/color_FFFFFF_80"
             android:textSize="@dimen/ts_22"
-            android:textStyle="bold" />
+            android:textStyle="bold" />        
 
         <TextView
             android:id="@+id/tv_seek_time"
@@ -242,7 +242,7 @@
             android:textColor="@color/color_FFFFFF_80"
             android:textStyle="bold"
             android:textSize="@dimen/ts_22" />
-    </LinearLayout>
+    </LinearLayout>    
 
     <LinearLayout
         android:id="@+id/top_container_hide"
@@ -444,7 +444,7 @@
         android:gravity="center"
         android:src="@drawable/icon_unlock"
         android:visibility="invisible" />
-
+    
     <LinearLayout
         android:id="@+id/tvBackButton"
         android:layout_width="@dimen/vs_60"
@@ -813,7 +813,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vs_10"
             android:scrollbars="none">
-
+            	
 	        <LinearLayout
 	            android:id="@+id/vod_control_bar"
 	            android:layout_width="match_parent"
@@ -823,7 +823,7 @@
 	            android:orientation="horizontal"
 	            android:paddingLeft="@dimen/vs_40"
 	            android:paddingRight="@dimen/vs_40">
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_prev"
 	                android:layout_width="@dimen/vs_60"
@@ -836,14 +836,14 @@
 	                android:gravity="center"
 	                android:nextFocusLeft="@id/play_time_end"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_60"
 	                    android:layout_height="@dimen/vs_60"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_prev" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_pause"
 	                android:layout_width="@dimen/vs_60"
@@ -857,7 +857,7 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:id="@+id/play_pauseImg"
 	                    android:layout_width="@dimen/vs_50"
@@ -865,7 +865,7 @@
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_pause" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_next"
 	                android:layout_width="@dimen/vs_60"
@@ -879,14 +879,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_60"
 	                    android:layout_height="@dimen/vs_60"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_next" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_speed"
 	                android:layout_width="@dimen/vs_60"
@@ -903,14 +903,14 @@
 	                android:nextFocusDown="@id/play_speed"
 	                android:orientation="horizontal"
 	                android:visibility="visible">
-
+	
 	                <ImageView
 	                    android:id="@+id/play_speed_img"
 	                    android:layout_width="@dimen/vs_60"
 	                    android:layout_height="@dimen/vs_60"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_ffwd" />
-
+	
 	            </LinearLayout>
 	            <TextView
 	                android:id="@+id/play_speed_txt"
@@ -928,7 +928,7 @@
 	                android:textColor="@color/color_FFFFFF"
 	                android:textSize="@dimen/ts_12"
 	                android:textStyle="bold" />
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_retry"
 	                android:layout_width="@dimen/vs_60"
@@ -942,14 +942,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_replay" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_scale"
 	                android:layout_width="@dimen/vs_60"
@@ -963,7 +963,7 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:id="@+id/play_scale_img"
 	                    android:layout_width="@dimen/vs_60"
@@ -987,7 +987,7 @@
 	                android:textColor="@color/color_FFFFFF"
 	                android:textSize="@dimen/ts_12"
 	                android:textStyle="bold" />
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_player"
 	                android:layout_width="@dimen/vs_60"
@@ -1001,14 +1001,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:id="@+id/play_player_img"
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_type" />
-
+	
 	                <TextView
 	                    android:id="@+id/play_player_txt"
 	                    android:layout_width="@dimen/vs_45"
@@ -1022,7 +1022,7 @@
 	                    android:textSize="@dimen/ts_14"
 	                    android:visibility="gone" />
 	            </LinearLayout>
-
+	
 	            <TextView
 	                android:id="@+id/play_ijk"
 	                android:layout_width="@dimen/vs_60"
@@ -1040,7 +1040,7 @@
 	                android:text="硬解码"
 	                android:textColor="@android:color/white"
 	                android:textSize="@dimen/ts_14" />
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_subtitle"
 	                android:layout_width="@dimen/vs_60"
@@ -1054,14 +1054,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_subtitle" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/play_audio"
 	                android:layout_width="@dimen/vs_60"
@@ -1075,14 +1075,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/v_audio" />
 	            </LinearLayout>
-
+	
 	            <LinearLayout
 	                android:id="@+id/screen_display"
 	                android:layout_width="@dimen/vs_60"
@@ -1096,14 +1096,14 @@
 	                android:focusable="true"
 	                android:gravity="center"
 	                android:orientation="horizontal">
-
+	
 	                <ImageView
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
 	                    android:layout_gravity="center"
 	                    android:src="@drawable/ic_clock" />
 	            </LinearLayout>
-
+	
 	            <TextView
 	                android:layout_width="1dp"
 	                android:layout_height="20dp"
@@ -1117,7 +1117,7 @@
 	                android:padding="@dimen/vs_10"
 	                android:textColor="@color/color_FFFFFF"
 	                android:textSize="@dimen/ts_22" />
-
+	                
 	            <TextView
 	                android:id="@+id/play_time_reset"
 	                android:layout_width="wrap_content"
@@ -1133,8 +1133,8 @@
 	                android:gravity="center"
 	                android:padding="@dimen/vs_10"
 	                android:textColor="@color/color_FFFFFF"
-	                android:textSize="@dimen/ts_22" />
-
+	                android:textSize="@dimen/ts_22" />    
+	
 	            <TextView
 	                android:id="@+id/play_time_start"
 	                android:layout_width="@dimen/vs_70"
@@ -1153,7 +1153,7 @@
 	                android:text="01:00"
 	                android:textColor="@android:color/white"
 	                android:textSize="@dimen/ts_16" />
-
+	
 	            <TextView
 	                android:id="@+id/play_time_end"
 	                android:layout_width="@dimen/vs_70"
@@ -1171,7 +1171,7 @@
 	                android:text="01:00"
 	                android:textColor="@android:color/white"
 	                android:textSize="@dimen/ts_16" />
-
+	
 	            <TextView
 	                android:id="@+id/play_time_step"
 	                android:layout_width="@dimen/vs_50"
@@ -1190,25 +1190,7 @@
 	                android:textSize="@dimen/ts_16"
 	                android:visibility="gone"
 	                tools:visibility="gone" />
-
-                <TextView
-                        android:id="@+id/play_brightness"
-                        android:layout_width="@dimen/vs_70"
-                        android:layout_height="@dimen/vs_60"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/vs_4"
-                        android:layout_marginLeft="@dimen/vs_4"
-                        android:background="@drawable/button_dialog_vod"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:nextFocusRight="@id/play_prev"
-                        android:nextFocusUp="@id/play_brightness"
-                        android:nextFocusDown="@id/play_brightness"
-                        android:padding="@dimen/vs_8"
-                        android:text="0.0"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/ts_16" />
-
+	                
 	            <LinearLayout
 	                android:id="@+id/landscape_portrait"
 	                android:layout_width="@dimen/vs_45"
@@ -1223,17 +1205,17 @@
 	                android:gravity="center"
 	                android:orientation="horizontal"
 	                android:visibility="gone">
-
+	
 	                <ImageView
 	                    android:id="@+id/lv_portrait"
 	                    android:layout_width="@dimen/vs_40"
 	                    android:layout_height="@dimen/vs_40"
-	                    android:layout_gravity="center"
+	                    android:layout_gravity="center"                    
 	                    android:src="@drawable/htov" />
-	            </LinearLayout>
+	            </LinearLayout>                
 	        </LinearLayout>
         </HorizontalScrollView>
-
+        
         <LinearLayout
             android:id="@+id/parse_root"
             android:layout_width="match_parent"
