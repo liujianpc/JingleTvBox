@@ -47,7 +47,7 @@ android {
             jniDebuggable false
             renderscriptDebuggable false
             versionNameSuffix ".release"
-            applicationIdSuffix ".release"
+           // applicationIdSuffix ".release"
 
 
             minifyEnabled true
