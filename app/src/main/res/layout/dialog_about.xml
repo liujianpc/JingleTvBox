@@ -7,6 +7,11 @@
     android:orientation="horizontal"
     android:padding="@dimen/vs_30">
 
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
     <TextView
         android:layout_width="@dimen/vs_600"
         android:layout_height="wrap_content"
@@ -16,11 +21,47 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="3"
-        android:text="本软件只提供聚合展示功能，所有资源来自网上, 软件不参与任何制作, 上传, 储存, 下载等内容. 软件仅供学习参考, 请于安装后24小时内删除。\n\n打包分发请保留出处\nhttps://github.com/CatVodTVOfficial/TVBoxOSC \n建议和意见，请联系:ljlovelife@foxmail.com"
+        android:text="本软件只提供聚合展示功能，所有资源来自网上, 软件不参与任何制作, 上传, 储存, 下载等内容. 软件仅供学习参考, 请于安装后24小时内删除。"
         android:textColor="@color/color_FFFFFF"
         android:textSize="@dimen/ts_24" />
 
+        <TextView
+                android:layout_marginTop="@dimen/ts_50"
+                android:layout_width="@dimen/vs_600"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/ts_50"
+                android:lineSpacingMultiplier="0"
+                android:shadowColor="@color/color_000000_60"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="3"
+                android:textStyle="bold"
+                android:text="请长按右侧二维码自动保存图片打开微信扫一扫，或手动打开微信扫一扫------------>>"
+                android:textColor="#ffff00"
+                android:textSize="@dimen/ts_24" />
+
+
+        <TextView
+                android:id="@+id/mail_tv"
+                android:layout_marginTop="@dimen/ts_50"
+                android:layout_width="@dimen/vs_600"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/ts_50"
+                android:lineSpacingMultiplier="0"
+                android:shadowColor="@color/color_000000_60"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="3"
+                android:textStyle="bold"
+                android:text="建议和意见、付费定制app，请联系:ljlovelife@foxmail.com"
+                android:textColor="#ffff00"
+                android:textSize="@dimen/ts_24" />
+
+    </LinearLayout>
+
+
     <ImageView
+        android:id="@+id/wechat_pay"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:gravity="center"

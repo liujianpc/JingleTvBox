@@ -1516,7 +1516,7 @@
                             android:layout_marginStart="@dimen/vs_5"
                             android:layout_marginLeft="@dimen/vs_5"
                             android:layout_weight="1"
-                            android:background="@drawable/shape_setting_model_focus"
+                            android:background="@drawable/setting_about_bg"
                             android:focusable="true"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"

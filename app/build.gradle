@@ -26,7 +26,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0_".concat(buildTime())
+        versionName "1.0_"
         multiDexEnabled true
         //设置room的Schema的位置
         javaCompileOptions {
@@ -46,7 +46,7 @@ android {
             debuggable false
             jniDebuggable false
             renderscriptDebuggable false
-            versionNameSuffix ".release"
+            versionNameSuffix buildTime()+"_release_"
            // applicationIdSuffix ".release"
 
 
@@ -55,6 +55,14 @@ android {
             zipAlignEnabled true
             signingConfig signingConfigs.release
 
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+        }
+
+
+        debug {
+            versionNameSuffix "debug"
             ndk {
                 abiFilters 'arm64-v8a'
             }
