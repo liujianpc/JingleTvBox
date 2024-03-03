@@ -1118,6 +1118,7 @@ public class DetailActivity extends BaseActivity {
         OkGo.getInstance().cancelTag("pushVod");
         EventBus.getDefault().unregister(this);
         if (!showPreview) Thunder.stop(true);
+        playFragment = null;
     }
 
     @Override

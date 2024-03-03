@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'me.ele.lancet'
 
 def static buildTime() {
     return new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
@@ -118,8 +119,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -210,4 +211,10 @@ dependencies {
             exclude group: 'xpp3', module: 'xpp3'
         }
     }
+
+    // 依赖lancet-all, 则包含所有lancet能力
+    debugImplementation "com.bytedance.tools.codelocator:codelocator-lancet-all:$codelocator_version"
+    compileOnly 'me.ele:lancet-base:1.0.6'
+    //implementation 'org.ow2.asm:asm:7.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:3.0-alpha-1'
 }
