@@ -504,6 +504,11 @@ public class LivePlayActivity extends BaseActivity {
             mVideoView.release();
             mVideoView = null;
         }
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
+
+        EventBus.getDefault().unregister(this);
     }
 
     private void showChannelList() {

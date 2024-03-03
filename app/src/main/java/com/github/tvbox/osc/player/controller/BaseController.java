@@ -16,12 +16,9 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.util.Map;
-
 import xyz.doikki.videoplayer.controller.BaseVideoController;
 import xyz.doikki.videoplayer.controller.IControlComponent;
 import xyz.doikki.videoplayer.controller.IGestureComponent;
@@ -57,7 +54,7 @@ public abstract class BaseController extends BaseVideoController implements Gest
 
     public BaseController(@NonNull Context context) {
         super(context);
-        mHandler = new Handler(new Handler.Callback() {
+        mHandler = new ControllerHandler(new Handler.Callback(){
             @Override
             public boolean handleMessage(@NonNull Message msg) {
                 int what = msg.what;
@@ -497,6 +494,12 @@ public abstract class BaseController extends BaseVideoController implements Gest
         return false;
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mHandler.removeCallbacksAndMessages(null);
+
+    }
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
@@ -505,5 +508,12 @@ public abstract class BaseController extends BaseVideoController implements Gest
 
     public boolean onKeyEvent(KeyEvent event) {
         return false;
+    }
+
+    private static final class ControllerHandler extends Handler {
+
+        ControllerHandler(Handler.Callback callback){
+            super(callback);
+        }
     }
 }

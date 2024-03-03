@@ -234,7 +234,7 @@ public class VodController extends BaseController {
     LinearLayout mSpeedll;
 
     // pause container
-    public static FrameLayout mProgressTop;
+    private FrameLayout mProgressTop;
     ImageView mPauseIcon;
     LinearLayout mTapSeek;
 
@@ -1116,6 +1116,10 @@ public class VodController extends BaseController {
         skipEnd = true;
         mHandler.removeMessages(1004);
         mHandler.sendEmptyMessageDelayed(1004, 100);
+    }
+
+    public void hideProgressTop() {
+        mProgressTop.setVisibility(View.INVISIBLE);
     }
 
     public interface VodControlListener {

@@ -707,12 +707,7 @@ public class SearchActivity extends BaseActivity {
         }
 
         for (String key : siteKey) {
-            sourceViewModel.execute(new Runnable() {
-                @Override
-                public void run() {
-                    sourceViewModel.getSearch(key, searchTitle);
-                }
-            });
+            sourceViewModel.execute(new SearchRunnable(key, searchTitle, sourceViewModel));
         }
     }
 
@@ -749,11 +744,11 @@ public class SearchActivity extends BaseActivity {
     
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         cancel();
         try {
             if (sourceViewModel != null) {
-                sourceViewModel.shutdownNow();
+                sourceViewModel.shutdownNow().clear();
+                pauseRunnable.clear();
                 sourceViewModel.destroyExecutor();
                 JsLoader.load();
             }
@@ -761,6 +756,7 @@ public class SearchActivity extends BaseActivity {
             LOG.e(th);
         }
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
     
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -769,5 +765,21 @@ public class SearchActivity extends BaseActivity {
         etSearch.requestFocus();
         etSearch.setText(inputMsgEvent.getText());
         search(inputMsgEvent.getText());
-    }    
+    }
+
+    static final class SearchRunnable implements Runnable {
+        private String key;
+        private String title;
+        private SourceViewModel sourceViewModel;
+        public SearchRunnable(String key, String title, SourceViewModel sourceViewModel) {
+            this.key = key;
+            this.title = title;
+            this.sourceViewModel= sourceViewModel;
+        }
+
+        @Override
+        public void run() {
+            sourceViewModel.getSearch(key, title);
+        }
+    }
 }

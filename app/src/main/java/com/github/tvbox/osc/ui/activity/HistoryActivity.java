@@ -170,6 +170,7 @@ public class HistoryActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        historyAdapter = null;
         EventBus.getDefault().unregister(this);
     }
 
