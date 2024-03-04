@@ -74,10 +74,10 @@ android {
         jingle {
             applicationId "com.tvbox.jingle"
             buildConfigField("int", "channel", "0")
-            buildConfigField("String", "APP_NAME", "\"坚果TV\"")
+            buildConfigField("String", "APP_NAME", "\"坚果影视\"")
             manifestPlaceholders = [
                     app_icon: "@drawable/app_icon_jingle",
-                    app_name: "坚果TV",
+                    app_name: "坚果影视",
             ]
 
         }
@@ -85,10 +85,10 @@ android {
         tao {
             applicationId "com.tvbox.taozi"
             buildConfigField("int", "channel", "1")
-            buildConfigField("String", "APP_NAME", "\"桃子TV\"")
+            buildConfigField("String", "APP_NAME", "\"桃子影视\"")
             manifestPlaceholders = [
                     app_icon: "@drawable/app_icon_tao",
-                    app_name: "桃子TV",
+                    app_name: "桃子影视",
             ]
 
         }
@@ -135,9 +135,9 @@ android {
 
 dependencies {
     constraints {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+      /*  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
-        }
+        }*/
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
             because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
         }

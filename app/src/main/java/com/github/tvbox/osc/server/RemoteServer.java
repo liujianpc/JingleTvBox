@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.util.Base64;
 import androidx.annotation.DrawableRes;
+import com.blankj.utilcode.util.ToastUtils;
 import com.github.tvbox.osc.BuildConfig;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.api.ApiConfig;
@@ -233,6 +234,7 @@ public class RemoteServer extends NanoHTTPD {
                                     } else {
                                         FileUtils.copyFile(tmp, file);
                                     }
+                                    ToastUtils.showShort("接收到文件:" + file.getAbsolutePath());
                                 }
                                 if (tmp.exists()) tmp.delete();
                             }
