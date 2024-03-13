@@ -17,6 +17,7 @@ import com.github.tvbox.osc.util.LOG;
 import com.github.tvbox.osc.util.LocaleHelper;
 import com.github.tvbox.osc.util.OkGoHelper;
 import com.github.tvbox.osc.util.PlayerHelper;
+import com.github.tvbox.osc.util.SubtitleHelper;
 import com.hjq.permissions.XXPermissions;
 import com.kingja.loadsir.core.LoadSir;
 import com.orhanobut.hawk.Hawk;
@@ -43,10 +44,12 @@ public class App extends MultiDexApplication {
     private static String dashData;
     public static ViewPump viewPump = null;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        SubtitleHelper.initSubtitleColor(this);
         initParams();
         // takagen99 : Initialize Locale
         initLocale();
