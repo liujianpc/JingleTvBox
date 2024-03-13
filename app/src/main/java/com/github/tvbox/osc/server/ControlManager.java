@@ -64,7 +64,7 @@ public class ControlManager {
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
                         bundle.putString("title", text);
-                        intent.setAction(SearchReceiver.action);
+                        intent.setAction(SearchReceiver.SEARCH_ACTION);
                         intent.setPackage(mContext.getPackageName());
                         intent.setComponent(new ComponentName(mContext, SearchReceiver.class));
                         intent.putExtras(bundle);
@@ -121,6 +121,7 @@ public class ControlManager {
     public void stopServer() {
         if (mServer != null && mServer.isStarting()) {
             mServer.stop();
+            mServer = null;
         }
     }
 }

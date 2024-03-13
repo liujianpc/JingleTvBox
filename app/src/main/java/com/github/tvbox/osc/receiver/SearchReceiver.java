@@ -16,11 +16,11 @@ import org.greenrobot.eventbus.EventBus;
  * @description:
  */
 public class SearchReceiver extends BroadcastReceiver {
-    public static String action = "android.content.movie.search.Action";
+    public static final String SEARCH_ACTION = "android.content.movie.search.Action";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (action.equals(intent.getAction()) && intent.getExtras() != null) {
+        if (SEARCH_ACTION.equals(intent.getAction()) && intent.getExtras() != null) {
             if (AppManager.getInstance().getActivity(SearchActivity.class) != null) {
                 AppManager.getInstance().backActivity(SearchActivity.class);
                 EventBus.getDefault().post(new ServerEvent(ServerEvent.SERVER_SEARCH, intent.getExtras().getString("title")));

@@ -73,6 +73,7 @@
         <entry key="app/src/main/res/drawable/shape_thumb_lang.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/shape_user_focus.xml" value="0.2335" />
         <entry key="app/src/main/res/drawable/shape_user_home.xml" value="0.2335" />
+        <entry key="app/src/main/res/drawable/v_next.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/v_type.xml" value="0.1895" />
         <entry key="app/src/main/res/layout-v21/activity_play.xml" value="0.16032608695652173" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
