@@ -234,7 +234,7 @@ public class VodController extends BaseController {
     LinearLayout mSpeedll;
 
     // pause container
-    private FrameLayout mProgressTop;
+    public FrameLayout mProgressTop;
     ImageView mPauseIcon;
     LinearLayout mTapSeek;
 
