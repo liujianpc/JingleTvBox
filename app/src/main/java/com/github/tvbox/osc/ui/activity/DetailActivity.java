@@ -195,7 +195,7 @@ public class DetailActivity extends BaseActivity {
         initView();
         initViewModel();
         initData();
-        initBrightness();
+        //initBrightness();
     }
 
     private void initBrightness() {
