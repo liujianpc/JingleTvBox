@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import com.github.tvbox.osc.util.LOG;
+import com.github.tvbox.osc.util.PlayerHelper;
 import java.util.Map;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
@@ -59,7 +60,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
                 mMediaPlayer.setDataSource(mAppContext, uri);
             }
         } catch (Exception e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -68,7 +69,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.setDataSource(new RawDataSourceProvider(fd));
         } catch (Exception e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -77,7 +78,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.pause();
         } catch (IllegalStateException e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -86,7 +87,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.start();
         } catch (IllegalStateException e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -95,7 +96,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.stop();
         } catch (IllegalStateException e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -104,7 +105,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.prepareAsync();
         } catch (IllegalStateException e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -125,7 +126,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
         try {
             mMediaPlayer.seekTo((int) time);
         } catch (IllegalStateException e) {
-            mPlayerEventListener.onError();
+            mPlayerEventListener.onError(-1, PlayerHelper.getRootCauseMessage(e));
         }
     }
 
@@ -201,7 +202,7 @@ public class IjkPlayer extends AbstractPlayer implements IMediaPlayer.OnErrorLis
 
     @Override
     public boolean onError(IMediaPlayer mp, int what, int extra) {
-        mPlayerEventListener.onError();
+        mPlayerEventListener.onError(-1, "未知播放错误");
         return true;
     }
 
